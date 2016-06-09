@@ -1,0 +1,41 @@
+{
+  "name": "uxgent",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "none"
+  },
+  "author": "uxgent",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.9.3",
+    "grunt": "^0.4.5",
+    "grunt-cli": "",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-imagemin": "^1.0.1",
+    "grunt-contrib-stylus": "^1.2.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-newer": "^1.2.0",
+    "grunt-shell": "~0.6.1",
+    "jeet": "^6.1.2",
+    "load-grunt-tasks": "^0.4.0",
+    "nib": "^1.1.0",
+    "rupture": "^0.6.1",
+    "time-grunt": "^0.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@uxgent.link:uxgent-perch.git"
+  },
+  "homepage": "https://uxgent.co",
+  "description": "uxgent site",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-rename": "0.0.3"
+  }
+}
