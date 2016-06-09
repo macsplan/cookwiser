@@ -11,6 +11,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-rename');
   grunt.loadNpmTasks('grunt-newer');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   grunt.initConfig({
     clean: {
@@ -18,18 +19,13 @@ module.exports = function(grunt) {
       css: ['htdocs/css/*.css'],
       js: ['htdocs/js/*.js']
     },
-    stylus: {
-      compile: {
-        options: {
-          paths: ['styl'],
-          use: [
-            require('nib'),
-            require('jeet'),
-            require('rupture')
-          ]
+    sass: {                              // Task
+      dist: {                            // Target
+        options: {                       // Target options
+          style: 'expanded'
         },
-        files: {
-          'htdocs/css/app.min.css': 'styl/app.styl'
+        files: {                         // Dictionary of files
+          'htdocs/css/app.css': 'css/app.scss'       // 'destination': 'source'
         }
       }
     },
@@ -44,14 +40,18 @@ module.exports = function(grunt) {
       js: {
         src: ['bower_components/jquery/dist/jquery.js', 
               'bower_components/jquery.scrollTo/jquery.scrollTo.js', 
-              'bower_components/moment/moment.js', 
               'bower_components/picturefill/dist/picturefill.js', 
               'bower_components/stickyNavbar.js/jquery.easing.min.js', 
               'bower_components/jquery-sticky/jquery.sticky.js', 
-              'bower_components/jquery-scrollTo/jquery.scrollTo.js', 
-              'bower_components/vide/dist/jquery.vide.js'],
+              'bower_components/jquery-scrollTo/jquery.scrollTo.js'
+              ],
         dest: 'htdocs/js/lib.js',
       },
+      ie: {
+        src: ['js/ie/html5shiv.js', 
+              'js/ie/respond.min.js'],
+        dest: 'htdocs/js/ie.js',
+      }
     },
     copy: {
       fonts: {
@@ -71,6 +71,7 @@ module.exports = function(grunt) {
       },
       target: {
         files: {
+          'htdocs/css/app.min.css': ['htdocs/css/app.css'],
           'htdocs/css/lib.min.css': ['htdocs/css/lib.css']
         }
       }
@@ -78,8 +79,9 @@ module.exports = function(grunt) {
     uglify: {
       main: {
         files: {
+          'htdocs/js/app.min.js': ['htdocs/js/app.js'],
           'htdocs/js/lib.min.js': ['htdocs/js/lib.js'],
-          'htdocs/js/app.min.js': ['htdocs/js/app.js']
+          'htdocs/js/ie.min.js': ['htdocs/js/ie.js']
         }
       }
     },
@@ -132,6 +134,6 @@ module.exports = function(grunt) {
     // }
   });
 
-  grunt.registerTask('default', ['clean:css', 'clean:js', 'stylus', 'concat', 'copy', 'cssmin', 'uglify', 'newer:imagemin:quick']);
+  grunt.registerTask('default', ['clean:css', 'clean:js', 'sass', 'concat', 'copy', 'cssmin', 'uglify', 'newer:imagemin:quick']);
   grunt.registerTask('optim', ['clean:img', 'imagemin:slow']);
 };
