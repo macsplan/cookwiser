@@ -13,6 +13,7 @@
     <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
 
     <link href='https://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="css/lib.css" />
     <link rel="stylesheet" type="text/css" href="css/app.css" />
 
     <script src="js/lib.js"></script>
@@ -27,7 +28,6 @@
     <?php perch_layout('home.header'); ?>
     <?php perch_layout('home.intro'); ?>
     <?php perch_layout('home.about'); ?>
-    <?php perch_layout('home.services'); ?>
     <?php perch_layout('home.contact'); ?>
     <?php perch_layout('home.footer'); ?>
   </body>

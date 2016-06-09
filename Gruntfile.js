@@ -34,18 +34,16 @@ module.exports = function(grunt) {
         separator: ';',
       },
       css: {
-        src: ['bower_components/normalize-css/normalize.css'],
-        dest: 'htdocs/css/lib.css',
+        src: ['bower_components/normalize-css/normalize.css',
+              'bower_components/bootstrap/dist/css/bootstrap.css',
+              'bower_components/font-awesome/css/font-awesome.css'],
+        dest: 'htdocs/css/lib.css'
       },
       js: {
         src: ['bower_components/jquery/dist/jquery.js', 
-              'bower_components/jquery.scrollTo/jquery.scrollTo.js', 
-              'bower_components/picturefill/dist/picturefill.js', 
-              'bower_components/stickyNavbar.js/jquery.easing.min.js', 
-              'bower_components/jquery-sticky/jquery.sticky.js', 
-              'bower_components/jquery-scrollTo/jquery.scrollTo.js'
-              ],
-        dest: 'htdocs/js/lib.js',
+              'bower_components/stickyNavbar.js/jquery.easing.min.js',
+              'bower_components/bootstrap/dist/js/bootstrap.js'],
+        dest: 'htdocs/js/lib.js'
       },
       ie: {
         src: ['js/ie/html5shiv.js', 
