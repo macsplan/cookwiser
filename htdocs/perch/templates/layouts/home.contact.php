@@ -2,7 +2,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 quote-form">
-        <?php perch_content("Contact Form") ?>
+        <div id="contact-form" class="col-xs-12 col-md-6">
+          <?php perch_content("Contact Form") ?>        
+        </div>
         <div class="contact-form-details col-xs-12 col-md-6">
           <div id="contact-message">
       			<div id="contact-message-content">

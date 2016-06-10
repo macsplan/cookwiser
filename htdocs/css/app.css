@@ -768,11 +768,16 @@ footer .container {
   background-color: #4071ce;
 }
 
-#contact-form input, #contact-form textarea {
+#contact-form p {
+  color: white;
+  padding-top: 3rem;
+}
+
+#contact input, #contact textarea {
   background-color: white;
   padding-left: 1rem;
 }
-#contact-form .btn-success {
+#contact .btn-success {
   background-color: #0413a3;
   border-color: #1d0e34;
   float: right;
@@ -780,7 +785,7 @@ footer .container {
   font-weight: bold;
   cursor: pointer;
 }
-#contact-form .btn-success:hover, #contact-form .btn-success:focus {
+#contact .btn-success:hover, #contact .btn-success:focus {
   background-color: #1d0e34;
   color: white;
   cursor: pointer;

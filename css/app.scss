@@ -794,7 +794,12 @@ footer .container {
 
 // phildec theme
 
-#contact-form {
+#contact-form p {
+  color: white;
+  padding-top: 3rem;;
+}
+
+#contact {
   input, textarea {
     background-color: white;
     padding-left: 1rem;
