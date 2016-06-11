@@ -1,1 +1,3 @@
 htdocs/perch/config/config.php
+node_modules
+*.log
