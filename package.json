@@ -35,6 +35,7 @@
   "homepage": "https://uxgent.co",
   "description": "uxgent site",
   "dependencies": {
+    "bower": "^1.7.9",
     "grunt": "^0.4.5",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-rename": "0.0.3"
