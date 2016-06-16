@@ -52,6 +52,5 @@
   },
   "_source": "https://github.com/garand/sticky.git",
   "_target": "^1.0.3",
-  "_originalSource": "sticky",
-  "_direct": true
+  "_originalSource": "jquery-sticky"
 }
