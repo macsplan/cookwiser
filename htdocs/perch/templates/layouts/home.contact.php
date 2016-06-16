@@ -16,9 +16,6 @@
           Or call us on <a href="tel:07952975804" title="Telephone">07952975804</a>
           <ul>
             <li class="icon">
-              <img src ="img/city.png" height="auto">
-            </li>
-            <li class="icon">
               <img src ="img/muraspec.png" height="auto">
             </li>
             <li class="icon">
