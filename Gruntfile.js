@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-rename');
   grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
 
   grunt.initConfig({
     clean: {
@@ -107,29 +107,20 @@ module.exports = function(grunt) {
         }]
       }
     },
-    // rename: {
-    //   main: {
-    //     files: [
-    //       {src: ['htdocs/_img'], dest: 'htdocs/img'},
-    //     ]
-    //   }
-    // },
-    // watch: {
-    //   styles: {
-    //     files: ['js/*',
-    //             'styl/*',
-    //             'styl/base/*',
-    //             'styl/modules/*',
-    //             'styl/pages/*',
-    //             'htdocs/*.php'],
-    //     tasks: ['clean', 'stylus', 'concat'],
-    //     options: {
-    //       interrupt : true,
-    //       atBegin : true,
-    //       livereload : true
-    //     }
-    //   }
-    // }
+    watch: {
+      styles: {
+        files: ['js/*',
+                'css/*',
+                'fonts/*',
+                'img/*'],
+        tasks: ['default'],
+        options: {
+          interrupt : true,
+          atBegin : true,
+          livereload : true
+        }
+      }
+    }
   });
 
   grunt.registerTask('default', ['clean:css', 'clean:js', 'sass', 'concat', 'copy', 'cssmin', 'uglify', 'newer:imagemin:quick']);
