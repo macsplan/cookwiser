@@ -111,8 +111,8 @@ module.exports = function(grunt) {
       styles: {
         files: ['js/*',
                 'css/*',
-                'fonts/*',
-                'img/*'],
+                'fonts/**/*',
+                'img/**/*'],
         tasks: ['default'],
         options: {
           interrupt : true,
