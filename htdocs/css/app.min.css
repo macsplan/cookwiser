@@ -1,1 +1,1 @@
-*{box-sizing:border-box}html{overflow-y:scroll}body{font-family:sans-serif}.grid{background:#DDD}.grid:after{content:'';display:block;clear:both}.grid-item,.grid-sizer{width:25%}.grid-item{float:left}.grid-item img{display:block;max-width:100%}
+.overlay{display:none}*{box-sizing:border-box}html{overflow-y:scroll}body{font-family:sans-serif}.grid{background:#DDD}.grid:after{content:'';display:block;clear:both}.grid-item,.grid-sizer{width:25%}.grid-item{float:left}.grid-item img{display:block;max-width:100%}

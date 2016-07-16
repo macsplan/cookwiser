@@ -2,19 +2,59 @@ var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
 
 $(document).ready(function(){
 
+  var clickHandler = function() {
+    $(".grid-item a").on("click", function(e) {
+      e.preventDefault();
+      var id = $(this).data("id");
+      console.log(id);
+
+      $.ajax({
+          url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
+          type: 'GET',
+          data: {}, // Additional parameters here
+          dataType: 'json',
+          success: function(data) {
+            console.log(data);
+            $('.popup-modal').magnificPopup('open');
+            $('.white-popup-block h1').text(data.title);
+          },
+          error: function(err) {
+            alert(err);
+          },
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+          }
+      });
+
+    });
+  };
+
+  $(function () {
+  	$('.popup-modal').magnificPopup({
+  		type: 'inline',
+  		preloader: false,
+  		modal: true
+  	});
+  	$(document).on('click', '.popup-modal-dismiss', function (e) {
+  		e.preventDefault();
+  		$.magnificPopup.close();
+  	});
+  });
+
+
   var renderResults = function(dishes) {
 
     var parent = $("#dishes");
 
     dishes.forEach(function(dish) {
       var child = $('<div/>')
-        .addClass("grid-item")
-        .attr("data-id", dish.id);
+        .addClass("grid-item");
 
       var linkname = (dish.title).replace(" ", "-");
 
       var link = $('<a/>')
-        .attr("href", "https://webknox.com/recipe/"+linkname+"-"+dish.id)
+        .attr("data-id", dish.id);
+        //.attr("href", "https://webknox.com/recipe/"+linkname+"-"+dish.id)
 
       var title = $('<p/>')
         .text(dish.title)
@@ -29,6 +69,8 @@ $(document).ready(function(){
       child.appendTo(parent);
     });
 
+    clickHandler();
+
     var $grid = $('#dishes').masonry({
     });
     $grid.imagesLoaded().progress( function() {
@@ -36,15 +78,9 @@ $(document).ready(function(){
     });
 
   }
-  //
-  // $('.grid-item').on('click', funtion() {
-  //
-  // });
-
-// load original dishes
 
   $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25', // The URL to the API. You can get this in the API page of the API you intend to consume
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25',
       type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
       data: {}, // Additional parameters here
       dataType: 'json',
@@ -61,41 +97,5 @@ $(document).ready(function(){
         xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
       }
   });
-
-
-  $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25', // The URL to the API. You can get this in the API page of the API you intend to consume
-      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
-      data: {}, // Additional parameters here
-      dataType: 'json',
-      success: function(data) {
-        var dishes = {};
-        console.log(data.results);
-        dishes = data.results;
-        renderResults(dishes);
-      },
-      error: function(err) {
-        alert(err);
-      },
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
-      }
-  });
-
-
-
-// load recipe info
-
-
-
-  // These code snippets use an open-source library. http://unirest.io/nodejs
-  // "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients=apples%2Cflour%2Csugar&limitLicense=false&number=5&ranking=1")
-
-  // // These code snippets use an open-source library. http://unirest.io/nodejs
-  // unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=burger&type=main+course")
-  // .header("X-Mashape-Key", "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS")
-  // .end(function (result) {
-  //   console.log(result.status, result.headers, result.body);
-  // });
 
 });
