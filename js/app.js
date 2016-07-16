@@ -8,11 +8,23 @@ $(document).ready(function(){
 
     dishes.forEach(function(dish) {
       var child = $('<div/>')
-        .addClass("grid-item");
+        .addClass("grid-item")
+        .attr("data-id", dish.id);
+
+      var linkname = (dish.title).replace(" ", "-");
+
+      var link = $('<a/>')
+        .attr("href", "https://webknox.com/recipe/"+linkname+"-"+dish.id)
+
+      var title = $('<p/>')
+        .text(dish.title)
+        .appendTo(link);
 
       var img = $('<img/>')
         .attr("src", "https://webknox.com/recipeImages/"+dish.image)
-        .appendTo(child);
+        .appendTo(link);
+
+      link.appendTo(child);
 
       child.appendTo(parent);
     });
@@ -24,6 +36,10 @@ $(document).ready(function(){
     });
 
   }
+  //
+  // $('.grid-item').on('click', funtion() {
+  //
+  // });
 
 // load original dishes
 
@@ -34,6 +50,7 @@ $(document).ready(function(){
       dataType: 'json',
       success: function(data) {
         var dishes = {};
+        console.log(data.results);
         dishes = data.results;
         renderResults(dishes);
       },
@@ -44,6 +61,31 @@ $(document).ready(function(){
         xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
       }
   });
+
+
+  $.ajax({
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25', // The URL to the API. You can get this in the API page of the API you intend to consume
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(data) {
+        var dishes = {};
+        console.log(data.results);
+        dishes = data.results;
+        renderResults(dishes);
+      },
+      error: function(err) {
+        alert(err);
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+      }
+  });
+
+
+
+// load recipe info
+
 
 
   // These code snippets use an open-source library. http://unirest.io/nodejs
