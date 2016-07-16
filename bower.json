@@ -26,6 +26,7 @@
     "stickyNavbar.js": "^1.3.2",
     "bootstrap": "~3.3.6",
     "font-awesome": "~4.6.3",
-    "jquery-sticky": "^1.0.3"
+    "jquery-sticky": "^1.0.3",
+    "masonry": "~4.1.0"
   }
 }

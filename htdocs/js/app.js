@@ -1,31 +1,59 @@
+var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
+
 $(document).ready(function(){
 
-  // jQuery for page scrolling feature - requires jQuery Easing plugin
-  jQuery('a.page-scroll').bind('click', function(event) {
-    var $anchor = jQuery(this);
-    jQuery('html, body').stop().animate({
-        scrollTop: jQuery($anchor.attr('href')).offset().top - 78
-    }, 1500, 'easeInOutExpo');
-    event.preventDefault();
+  var renderResults = function(dishes) {
+
+    var parent = $("#dishes");
+
+    dishes.forEach(function(dish) {
+      var child = $('<div/>')
+        .addClass("grid-item");
+
+      var img = $('<img/>')
+        .attr("src", "https://webknox.com/recipeImages/"+dish.image)
+        .appendTo(child);
+
+      child.appendTo(parent);
+    });
+
+    var $grid = $('#dishes').masonry({
+    });
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
+    });
+
+  }
+
+// load original dishes
+
+  $.ajax({
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25', // The URL to the API. You can get this in the API page of the API you intend to consume
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(data) {
+        var dishes = {};
+        dishes = data.results;
+        renderResults(dishes);
+      },
+      error: function(err) {
+        alert(err);
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+      }
   });
 
-  // toggle top nav items
-  jQuery("a[data-toggle=\"tab\"]").click(function(e) {
-    e.preventDefault();
-    jQuery(this).tab("show");
-  });
 
-  // Closes the Responsive Menu on Menu Item Click
-  jQuery('.navbar-collapse ul li a').click(function() {
-    jQuery('.navbar-toggle:visible').click();
-  });
+  // These code snippets use an open-source library. http://unirest.io/nodejs
+  // "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients=apples%2Cflour%2Csugar&limitLicense=false&number=5&ranking=1")
 
-  // cbpScroll code
-  // --------------
-
-  var docElem = document.documentElement,
-		header = document.querySelector( '.navbar-fixed-top' ),
-		didScroll = false,
-    showLogoOn = 450;
+  // // These code snippets use an open-source library. http://unirest.io/nodejs
+  // unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=burger&type=main+course")
+  // .header("X-Mashape-Key", "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS")
+  // .end(function (result) {
+  //   console.log(result.status, result.headers, result.body);
+  // });
 
 });

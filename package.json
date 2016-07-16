@@ -1,11 +1,11 @@
 {
-  "name": "phildec",
+  "name": "cookwiser",
   "version": "1.0.0",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "none"
   },
-  "author": "uxgent",
+  "author": "cookwiser",
   "license": "UNLICENSED",
   "devDependencies": {
     "autoprefixer-stylus": "^0.9.3",
@@ -27,10 +27,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@uxgent.link:phildec.git"
+    "url": "git+ssh://git@uxgent.link:cookwiser.git"
   },
-  "homepage": "http://phildec.co.uk",
-  "description": "phildec site",
+  "homepage": "http://cookwiser.com",
+  "description": "cookwiser site",
   "dependencies": {
     "bower": "^1.7.9",
     "grunt": "^0.4.5",

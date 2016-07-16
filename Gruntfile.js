@@ -40,15 +40,11 @@ module.exports = function(grunt) {
         dest: 'htdocs/css/lib.css'
       },
       js: {
-        src: ['bower_components/jquery/dist/jquery.js', 
+        src: ['bower_components/jquery/dist/jquery.js',
               'bower_components/stickyNavbar.js/jquery.easing.min.js',
+              'bower_components/masonry/dist/masonry.pkgd.js',
               'bower_components/bootstrap/dist/js/bootstrap.js'],
         dest: 'htdocs/js/lib.js'
-      },
-      ie: {
-        src: ['js/ie/html5shiv.js', 
-              'js/ie/respond.min.js'],
-        dest: 'htdocs/js/ie.js',
       }
     },
     copy: {
@@ -56,7 +52,7 @@ module.exports = function(grunt) {
         expand: true,
         src: 'fonts/**/*',
         dest: 'htdocs/',
-      },      
+      },
       js: {
         src: 'js/app.js',
         dest: 'htdocs/js/app.js'
@@ -73,7 +69,7 @@ module.exports = function(grunt) {
           'htdocs/css/lib.min.css': ['htdocs/css/lib.css']
         }
       }
-    },        
+    },
     uglify: {
       main: {
         files: {
