@@ -35,17 +35,14 @@ module.exports = function(grunt) {
       },
       css: {
         src: ['bower_components/normalize-css/normalize.css',
-              'bower_components/bootstrap/dist/css/bootstrap.css',
-              'bower_components/magnific-popup/dist/magnific-popup.css',
-              'bower_components/font-awesome/css/font-awesome.css'],
+              'bower_components/magnific-popup/dist/magnific-popup.css'],
         dest: 'htdocs/css/lib.css'
       },
       js: {
         src: ['bower_components/jquery/dist/jquery.js',
-              'bower_components/stickyNavbar.js/jquery.easing.min.js',
               'bower_components/masonry/dist/masonry.pkgd.js',
               'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
-              'bower_components/bootstrap/dist/js/bootstrap.js'],
+              'bower_components/scotchPanels/dist/scotchPanels.js'],
         dest: 'htdocs/js/lib.js'
       }
     },
@@ -76,8 +73,7 @@ module.exports = function(grunt) {
       main: {
         files: {
           'htdocs/js/app.min.js': ['htdocs/js/app.js'],
-          'htdocs/js/lib.min.js': ['htdocs/js/lib.js'],
-          'htdocs/js/ie.min.js': ['htdocs/js/ie.js']
+          'htdocs/js/lib.min.js': ['htdocs/js/lib.js']
         }
       }
     },
