@@ -113,6 +113,43 @@ $(document).ready(function(){
       }
   });
 
+//   var states = [
+//     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+//     'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
+//     'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
+//     'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
+//     'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+//     'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+//     'New Jersey', 'New Mexico', 'New York', 'North Carolina',
+//     'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+//     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
+//     'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+//     'West Virginia', 'Wisconsin', 'Wyoming'
+//   ];
+//
+//   $("#ingredients").autocomplete({
+//   source:[states]
+// });
+
+  $('#ingredients').autocomplete({
+    valueKey:'name',
+    source: [{
+      url:"https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=%QUERY%",
+      type:'remote'
+    }],
+    getTitle:function(item){
+      return item['name']
+    },
+    getValue:function(item){
+      return item['name']
+    }
+  });
+
+  // $('button#open').click(function(){
+  //   $('#remote_input').trigger('open');
+  //   $('#remote_input').focus();
+  // });
+
   // var addIngredients = function() {
   //   var item = $("#ingredients").val();
   //   if (!ingredientsList.includes(item)) {
