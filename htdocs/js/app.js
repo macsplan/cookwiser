@@ -10,10 +10,17 @@ $(document).ready(function(){
   	url: function(phrase) {
   		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=" + phrase;
     },
-    getValue: "name"
+    getValue: "name",
+    theme: "dark",
+    list: {
+  		onClickEvent: function() {
+        console.log($("#ingredients").val());
+  		}
+  	}
   };
 
-  $("#provider-remote").easyAutocomplete(options);
+  $("#ingredients").easyAutocomplete(options);
+
 
   $('#scotch-panel').scotchPanel({
     containerSelector: 'body',
@@ -21,7 +28,7 @@ $(document).ready(function(){
     duration: 300,
     transition: 'ease',
     clickSelector: '.toggle-panel',
-    distanceX: '30%',
+    distanceX: '300px',
     enableEscapeKey: true
   });
 
@@ -81,6 +88,7 @@ $(document).ready(function(){
         //.attr("href", "https://webknox.com/recipe/"+linkname+"-"+dish.id)
 
       var title = $('<p/>')
+        .addClass("text-overlay")
         .text(dish.title)
         .appendTo(link);
 

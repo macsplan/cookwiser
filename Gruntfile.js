@@ -36,8 +36,8 @@ module.exports = function(grunt) {
       css: {
         src: ['bower_components/normalize-css/normalize.css',
               'bower_components/magnific-popup/dist/magnific-popup.css',
-              'bower_components/EasyAutocomplete/dist/easy-autocomplete.css'],
-
+              'bower_components/EasyAutocomplete/dist/easy-autocomplete.css',
+              'bower_components/EasyAutocomplete/dist/easy-autocomplete.themes.css'],
         dest: 'htdocs/css/lib.css'
       },
       js: {

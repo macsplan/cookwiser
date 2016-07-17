@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Cookwiser</title>
+  <link href='https://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/app.css">
   <script src="js/lib.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
@@ -16,31 +17,31 @@
       <h3>What Ingredients are in your fridge?</h3>
       <br>
       <label>Main Ingredient</label<br>
-      <input type="text" name="ingredients"><br>
+      <input type="text" id="ingredients"><br>
     </form>
   </div>
 
   <header>
       <div class="container-fluid">
           <div class="row">
-              <div class="col-md-12">
-                  <a href="#" class="toggle-panel">
-                    <i class="fa fa-bars"></i>
-                  </a>
-                  <p>Filter by whats in you fridge</p>
-              </div>
+
           </div>
       </div>
   </header>
 
   <article class="container">
     <div class="content">
+      <div class="filter-cta">
+          <a href="#" class="toggle-panel">
+            <i class="fa fa-bars"></i>
+          </a>
+          <p>Filter by whats in you fridge</p>
+      </div>
       <a class="popup-modal" href="#test-modal" style="display: none;">Open modal</a>
-      <input id="provider-remote" />
 
-      <!-- <div id="dishes" class="grid">
+      <div id="dishes" class="grid">
         <div class="grid-sizer"></div>
-      </div> -->
+      </div>
 
       <div class="overlay">
         <div id="test-modal" class="white-popup-block mfp-hide">

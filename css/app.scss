@@ -1,6 +1,10 @@
 /*==================================
 =            SITE STUFF            =
 ==================================*/
+
+.scotchified {
+   background-image: url("../img/choppingboard.jpg");
+}
 a {
     text-decoration: none !important;
     -webkit-transition: all 225ms ease;
@@ -9,7 +13,7 @@ a {
 }
 header {
     position: relative;
-    background: #222;
+    background: #819c05;
     height: 50px;
 }
 header a {
@@ -45,9 +49,14 @@ article {
 =            PANEL STYLES            =
 ====================================*/
 #scotch-panel {
-    background: #444;
-    // width: 30% !important;
-    // left: 30% !important;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2%;
+    form {
+      color: #fff;
+      h3 {
+        font-weight: normal;
+      }
+    }
 }
 #scotch-panel ul {
     list-style: none;
@@ -71,19 +80,17 @@ article {
 
 
 #dishes {
-  // list-style-type: none;
-  div {
-    // float: left;
-    // width: 20%;
-    // padding: 1rem;
-    // display: inline-block;
-    // width: 200px;
-    // height: 300px;
-    // overflow: hidden;
-    // margin-left: 1rem;
-    img {
-      // height: 100%;
-      // height: 300px;
+  .grid-item {
+    .text-overlay {
+      position: absolute;
+      bottom: 0;
+      color: #fff;
+      background-color:rgba(0,0,0,0.7);
+      width: 100%;
+      padding: 5%;
+      margin: 0;
+      text-transform: uppercase;
+      font-family: 'PT Mono', ;
     }
   }
 }
@@ -126,4 +133,27 @@ body { font-family: sans-serif; }
 .grid-item img {
   display: block;
   max-width: 100%;
+}
+
+
+@media (max-width: 400px) {
+  .grid-sizer,
+  .grid-item {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .grid-sizer,
+  .grid-item {
+    width: 50%;
+  }
+}
+
+
+@media (min-width: 501px) and (max-width: 900px) {
+  .grid-sizer,
+  .grid-item {
+    width: 33.3333%;
+  }
 }
