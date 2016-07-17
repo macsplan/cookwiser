@@ -1,26 +1,11 @@
 var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
+var ingredientsList = [];
 
 $(document).ready(function(){
 
   $.ajaxSetup({
     headers: { "X-Mashape-Key": "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS" }
   });
-
-  var options = {
-  	url: function(phrase) {
-  		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=" + phrase;
-    },
-    getValue: "name",
-    theme: "dark",
-    list: {
-  		onClickEvent: function() {
-        console.log($("#ingredients").val());
-  		}
-  	}
-  };
-
-  $("#ingredients").easyAutocomplete(options);
-
 
   $('#scotch-panel').scotchPanel({
     containerSelector: 'body',
@@ -60,17 +45,16 @@ $(document).ready(function(){
   };
 
 
-  $(function () {
-  	$('.popup-modal').magnificPopup({
-  		type: 'inline',
-  		preloader: false,
-  		modal: true
-  	});
-  	$(document).on('click', '.popup-modal-dismiss', function (e) {
-  		e.preventDefault();
-  		$.magnificPopup.close();
-  	});
-  });
+	$('.popup-modal').magnificPopup({
+		type: 'inline',
+		preloader: false,
+		modal: true
+	});
+
+	$(document).on('click', '.popup-modal-dismiss', function (e) {
+		e.preventDefault();
+		$.magnificPopup.close();
+	});
 
 
   var renderResults = function(dishes) {
@@ -108,7 +92,6 @@ $(document).ready(function(){
     $grid.imagesLoaded().progress( function() {
       $grid.masonry('layout');
     });
-
   }
 
   $.ajax({
@@ -129,5 +112,31 @@ $(document).ready(function(){
         xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
       }
   });
+
+
+  var easyAutocompleteOptions = {
+  	url: function(phrase) {
+  		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=" + phrase;
+    },
+    getValue: "name",
+    theme: "dark",
+    list: {
+      match: {
+         enabled: true
+      },
+      onClickEvent: function() {
+        var item = $("#ingredients").val();
+        ingredientsList.push(item);
+        console.log(ingredientsList);
+  		},
+  		onKeyEnterEvent: function() {
+        var item = $("#ingredients").val();
+        ingredientsList.push(item);
+        console.log(ingredientsList);
+  		},
+  	}
+  };
+
+  $("#ingredients").easyAutocomplete(easyAutocompleteOptions);
 
 });
