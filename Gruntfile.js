@@ -35,13 +35,15 @@ module.exports = function(grunt) {
       },
       css: {
         src: ['bower_components/normalize-css/normalize.css',
-              'bower_components/magnific-popup/dist/magnific-popup.css'],
+              'bower_components/magnific-popup/dist/magnific-popup.css',
+              'bower_components/autocompletelikegoogle/jquery.autocomplete.css'],
         dest: 'htdocs/css/lib.css'
       },
       js: {
         src: ['bower_components/jquery/dist/jquery.js',
               'bower_components/masonry/dist/masonry.pkgd.js',
               'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
+              'bower_components/autocompletelikegoogle/jquery.autocomplete.js',
               'bower_components/scotchPanels/dist/scotchPanels.js'],
         dest: 'htdocs/js/lib.js'
       }
