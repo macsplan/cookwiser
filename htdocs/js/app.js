@@ -113,30 +113,41 @@ $(document).ready(function(){
       }
   });
 
+  // var addIngredients = function() {
+  //   var item = $("#ingredients").val();
+  //   if (!ingredientsList.includes(item)) {
+  //     ingredientsList.push(item);
+  //   }
+  //   console.log(ingredientsList);
+  // };
 
-  var easyAutocompleteOptions = {
-  	url: function(phrase) {
-  		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=" + phrase;
-    },
-    getValue: "name",
-    theme: "dark",
-    list: {
-      match: {
-         enabled: true
-      },
-      onClickEvent: function() {
-        var item = $("#ingredients").val();
-        ingredientsList.push(item);
-        console.log(ingredientsList);
-  		},
-  		onKeyEnterEvent: function() {
-        var item = $("#ingredients").val();
-        ingredientsList.push(item);
-        console.log(ingredientsList);
-  		},
-  	}
-  };
-
-  $("#ingredients").easyAutocomplete(easyAutocompleteOptions);
+  // var easyAutocompleteOptions = {
+  // 	url: function(phrase) {
+  // 		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=" + phrase;
+  //   },
+  //   getValue: "name",
+  //   theme: "dark",
+  //   list: {
+  //     match: {
+  //        enabled: false
+  //     },
+  //     onClickEvent: function() {
+  //       var item = $("#ingredients").val();
+  //       if (!ingredientsList.includes(item)) {
+  //         ingredientsList.push(item);
+  //       }
+  //       console.log(ingredientsList);
+  // 		},
+  // 		onSelectItemEvent: function() {
+  //       var item = $("#ingredients").val();
+  //       if (!ingredientsList.includes(item)) {
+  //         ingredientsList.push(item);
+  //       }
+  //       console.log(ingredientsList);
+  // 		},
+  // 	}
+  // };
+  //
+  // $("#ingredients").easyAutocomplete(easyAutocompleteOptions);
 
 });
