@@ -11,13 +11,13 @@
 </head>
 <body>
 
-  <div id="scotch-panel">
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <div id="scotch-panel" data-direction="left">
+    <form>
+      <h3>What Ingredients are in your fridge?</h3>
+      <br>
+      <label>Main Ingredient</label<br>
+      <input type="text" name="ingredients"><br>
+    </form>
   </div>
 
   <header>
@@ -27,6 +27,7 @@
                   <a href="#" class="toggle-panel">
                     <i class="fa fa-bars"></i>
                   </a>
+                  <p>Filter by whats in you fridge</p>
               </div>
           </div>
       </div>
@@ -35,10 +36,11 @@
   <article class="container">
     <div class="content">
       <a class="popup-modal" href="#test-modal" style="display: none;">Open modal</a>
+      <input id="provider-remote" />
 
-      <div id="dishes" class="grid">
+      <!-- <div id="dishes" class="grid">
         <div class="grid-sizer"></div>
-      </div>
+      </div> -->
 
       <div class="overlay">
         <div id="test-modal" class="white-popup-block mfp-hide">

@@ -2,13 +2,26 @@ var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
 
 $(document).ready(function(){
 
+  $.ajaxSetup({
+    headers: { "X-Mashape-Key": "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS" }
+  });
+
+  var options = {
+  	url: function(phrase) {
+  		return "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=" + phrase;
+    },
+    getValue: "name"
+  };
+
+  $("#provider-remote").easyAutocomplete(options);
+
   $('#scotch-panel').scotchPanel({
     containerSelector: 'body',
     direction: 'right',
     duration: 300,
     transition: 'ease',
     clickSelector: '.toggle-panel',
-    distanceX: '70%',
+    distanceX: '30%',
     enableEscapeKey: true
   });
 
@@ -38,6 +51,7 @@ $(document).ready(function(){
 
     });
   };
+
 
   $(function () {
   	$('.popup-modal').magnificPopup({
