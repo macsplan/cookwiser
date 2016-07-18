@@ -45,11 +45,16 @@ $(document).ready(function(){
         success: function(data) {
           var steps = data[0].steps;
           $('.white-popup-block .method').empty();
+
+          var ol = $("<ol/>");
+
           steps.forEach(function(step) {
-            var line = $("<p/>")
+            var line = $("<li/>")
               .text(step.step)
-              .appendTo($('.white-popup-block .method'));
+              .appendTo(ol);
           });
+
+          ol.appendTo($('.white-popup-block .method'));
         },
         error: function(err) {
           alert(err);
