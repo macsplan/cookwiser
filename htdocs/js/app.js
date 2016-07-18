@@ -5,16 +5,38 @@ var currentItem;
 $(document).ready(function(){
 
   var openDialog = function(id, data) {
+
+    $('.popup-modal').magnificPopup('open');
+
+    // get recipe information
     $.ajax({
         url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
         type: 'GET',
         data: {}, // Additional parameters here
         dataType: 'json',
         success: function(data) {
-          console.log(data);
-          $('.popup-modal').magnificPopup('open');
           $('.white-popup-block h1').text(data.title);
           $('.white-popup-block img').attr('src', data.image);
+        },
+        error: function(err) {
+          alert(err);
+        }
+    });
+
+    // get recipe instructions
+    $.ajax({
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/analyzedInstructions?stepBreakdown=true',
+        type: 'GET',
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          var steps = data[0].steps;
+          $('.white-popup-block .method').empty();
+          steps.forEach(function(step) {
+            var line = $("<p/>")
+              .text(step.step)
+              .appendTo($('.white-popup-block .method'));
+          });
         },
         error: function(err) {
           alert(err);
