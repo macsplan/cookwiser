@@ -537,7 +537,65 @@ img.mfp-img {
   background-image: url("../img/choppingboard.jpg");
   text-align: center; }
   #test-modal .imageRow {
-    background-color: #fff; }
+    background-color: #fff;
+    border-top: 5px solid #613594;
+    height: 100vh;
+    max-height: 66vh;
+    border-bottom: 10px solid #ca3763; }
+  #test-modal #method {
+    background-color: white;
+    width: 90%;
+    margin: 2% auto;
+    padding-top: 5px; }
+    #test-modal #method .recipe_guide {
+      float: right;
+      width: 400px; }
+      #test-modal #method .recipe_guide .serving, #test-modal #method .recipe_guide .ready_in {
+        width: 120px;
+        display: inline-block; }
+        #test-modal #method .recipe_guide .serving .fa, #test-modal #method .recipe_guide .ready_in .fa {
+          background-color: #bebebe;
+          padding: 5px 8px;
+          font-size: 2em;
+          border-radius: 5px;
+          color: #fff; }
+        #test-modal #method .recipe_guide .serving span, #test-modal #method .recipe_guide .ready_in span {
+          padding-left: 5px;
+          display: inline-block;
+          vertical-align: top; }
+        #test-modal #method .recipe_guide .serving em, #test-modal #method .recipe_guide .ready_in em {
+          display: block;
+          font-style: normal;
+          font-size: 1.4em; }
+      #test-modal #method .recipe_guide .ready_in {
+        width: 180px; }
+    #test-modal #method .ingredient_label {
+      font-family: "PT Mono";
+      background-color: #613594;
+      width: 200px;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1.3em;
+      padding: 4px;
+      margin-top: 5%; }
+    #test-modal #method .ingredients {
+      padding: 2%;
+      border: 2px dashed #829c05;
+      margin: 3% 5% 5%;
+      border-radius: 30px;
+      text-align: left; }
+      #test-modal #method .ingredients p {
+        width: 100px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 1%; }
+        #test-modal #method .ingredients p img {
+          width: 100px;
+          max-height: 70px; }
+        #test-modal #method .ingredients p span {
+          font-size: 12px;
+          text-align: center;
+          display: block; }
 
 @media (max-width: 400px) {
   .grid-sizer,

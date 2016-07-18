@@ -4,9 +4,34 @@ var currentItem;
 
 $(document).ready(function(){
 
-  var openDialog = function(id, data) {
+  var openDialog = function(id, linkname, data) {
 
     $('.popup-modal').magnificPopup('open');
+
+    var resizeImages = function() {
+      $('.white-popup-block img').each(function() {
+        var maxWidth = 1000; // Max width for the image
+        var maxHeight = '60vh';    // Max height for the image
+        var ratio = 0;  // Used for aspect ratio
+        var width = $(this).width();    // Current image width
+        var height = $(this).height();  // Current image height
+
+        // Check if the current width is larger than the max
+        if(width > maxWidth){
+            $(this).css("height", '100%');  // Scale height based on ratio
+            // height = height * ratio;    // Reset height to match scaled image
+            // width = width * ratio;    // Reset width to match scaled image
+        }
+
+        // Check if current height is larger than max
+        if(height > maxHeight){
+            ratio = maxHeight / height; // get ratio for scaling image
+            $(this).css("height", maxHeight);   // Set new height
+            // $(this).css("width", width * ratio);    // Scale width based on ratio
+            // width = width * ratio;    // Reset width to match scaled image
+        }
+    });
+    }
 
     // get recipe information
     $.ajax({
@@ -17,17 +42,23 @@ $(document).ready(function(){
         success: function(data) {
           $('.white-popup-block h1').text(data.title);
           $('.white-popup-block img').attr('src', data.image);
+          resizeImages();
+          $('.white-popup-block .serving span em').empty();
+          $('.white-popup-block .serving span em').text(data.servings);
+          $('.white-popup-block .ready_in span em ').empty();
+          $('.white-popup-block .ready_in span').text('ready in '+data.readyInMinutes+ " minutes");
+
+
           $('.white-popup-block .ingredients').empty();
           var ingredients = data.extendedIngredients;
           ingredients.forEach(function(ingredient) {
             var line = $("<p/>")
-              .text(ingredient.name)
               .appendTo($('.white-popup-block .ingredients'));
-            var instruction = $("<span/>")
-              .text(ingredient.originalString)
-              .appendTo(line);
             var img = $("<img/>")
               .attr("src", ingredient.image)
+              .appendTo(line);
+            var instruction = $("<span/>")
+              .text(ingredient.originalString)
               .appendTo(line);
           });
         },
@@ -43,16 +74,28 @@ $(document).ready(function(){
         data: {}, // Additional parameters here
         dataType: 'json',
         success: function(data) {
-          var steps = data[0].steps;
-          $('.white-popup-block .method').empty();
+          console.log(data);
+          if (data.length > 0) {
+            var steps = data[0].steps;
+            $('.white-popup-block .method').empty();
 
-          var ol = $("<ol/>");
+            var ol = $("<ol/>");
 
-          steps.forEach(function(step) {
-            var line = $("<li/>")
-              .text(step.step)
-              .appendTo(ol);
-          });
+            steps.forEach(function(step) {
+              var line = $("<li/>")
+                .text(step.step)
+                .appendTo(ol);
+            });
+          } else {
+            var ol = $("<ol/>");
+              linkname = linkname.toLowerCase();
+
+              var link = $("<a/>")
+              .attr("href", "https://spoonacular.com/recipes/"+linkname+"-"+id)
+              .text("Read the detailed instructions on");
+
+              link.appendTo(ol);
+          }
 
           ol.appendTo($('.white-popup-block .method'));
         },
@@ -81,7 +124,8 @@ $(document).ready(function(){
         .attr("data-id", item.id)
         .on("click", function(e) {
           e.preventDefault();
-          openDialog($(this).data("id"), this);
+          console.log(item)
+          openDialog($(this).data("id"), linkname, this);
         });
 
       var title = $('<p/>')

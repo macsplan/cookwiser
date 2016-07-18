@@ -543,8 +543,77 @@ img.mfp-img {
     text-align: center;
     .imageRow {
       background-color: #fff;
-      // height: 50%;
-      // max-height: 500px;
+      border-top: 5px solid #613594;
+      height: 100vh;
+      max-height: 66vh;
+      border-bottom: 10px solid #ca3763;
+    }
+    #method {
+      background-color: white;
+      width: 90%;
+      margin: 2% auto;
+      padding-top: 5px;
+      .recipe_guide {
+        float: right;
+        width: 400px;
+        .serving, .ready_in  {
+            width: 120px;
+            display: inline-block;
+            .fa {
+              background-color: #bebebe;
+              padding: 5px 8px;
+              font-size: 2em;
+              border-radius: 5px;
+              color: #fff;
+            }
+            span {
+              padding-left: 5px;
+              display: inline-block;
+              vertical-align: top;
+            }
+            em {
+              display: block;
+              font-style: normal;
+              font-size: 1.4em;;
+            }
+        }
+        .ready_in {
+          width: 180px;
+        }
+      }
+
+      .ingredient_label {
+        font-family: "PT Mono";
+        background-color: #613594;
+        width: 200px;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 1.3em;
+        padding: 4px;
+        margin-top: 5%;
+      }
+      .ingredients {
+        padding: 2%;
+        border: 2px dashed #829c05;
+        margin: 3% 5% 5%;
+        border-radius: 30px;
+        text-align: left;
+        p {
+          width: 100px;
+          display: inline-block;
+          vertical-align: top;
+          margin: 1%;
+          img {
+            width: 100px;
+            max-height: 70px;
+          }
+          span {
+            font-size: 12px;
+            text-align: center;
+            display: block;
+          }
+        }
+      }
     }
   }
 
