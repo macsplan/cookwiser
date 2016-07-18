@@ -82,7 +82,6 @@ article {
 #ingredients {
   width: 180px;
   margin-left: 1em;
-  height: 2.5em;
   border-radius: 2em;
   outline: none;
   border-color: #ca3763;
@@ -94,20 +93,30 @@ article {
   padding: 6px;
   border: 2px solid #492c6b;
   text-align: left;
-  width: 48%;
-  margin: 1%;
+  width: 49.8%;
+  margin: 0.1%;
   display: inline-block;
+  position: relative;
   &.last {
     width: 100%;
-    background-color: pink;
   }
 }
-
-.even {
-}
-
-.odd {
-  width: 100%;
+.remove {
+  cursor: pointer;
+  height: 0 !important;
+  line-height: inherit !important;
+  &:before {
+    content: "\f00d";
+    font-family: FontAwesome;
+    float: right;
+    top: -4px;
+    position: absolute;
+    right: 6px;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #8c8c8c;
+    padding: 5px;
+  }
 }
 
 .xdsoft_autocomplete .xdsoft_autocomplete_dropdown {

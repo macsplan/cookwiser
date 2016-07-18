@@ -4,20 +4,6 @@ var currentItem;
 
 $(document).ready(function(){
 
-  $.ajaxSetup({
-    headers: { "X-Mashape-Key": "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS" }
-  });
-
-  $('#scotch-panel').scotchPanel({
-    containerSelector: 'body',
-    direction: 'right',
-    duration: 300,
-    transition: 'ease',
-    clickSelector: '.toggle-panel',
-    distanceX: '300px',
-    enableEscapeKey: true
-  });
-
   var clickHandler = function() {
     $(".grid-item a").on("click", function(e) {
       e.preventDefault();
@@ -44,18 +30,6 @@ $(document).ready(function(){
 
     });
   };
-
-
-	$('.popup-modal').magnificPopup({
-		type: 'inline',
-		preloader: false,
-		modal: true
-	});
-
-	$(document).on('click', '.popup-modal-dismiss', function (e) {
-		e.preventDefault();
-		$.magnificPopup.close();
-	});
 
 
   var renderResults = function(dishes) {
@@ -105,6 +79,14 @@ $(document).ready(function(){
     }
   }
 
+
+  var setupRemoveIngredientHandler = function() {
+    $(".myIngredients li .remove").on("click", function(e) {
+      e.preventDefault();
+      console.log('clicked')
+    });
+  };
+
   var appendItem = function() {
     var ingredientsStr = ingredientsList.join(',');
     console.log(ingredientsStr);
@@ -112,52 +94,88 @@ $(document).ready(function(){
 
     var listItem = $('<li/>')
       .text(currentItem)
-      .appendTo(parent);
+
+    var remove = $('<a/>')
+      .addClass('remove')
+      .appendTo(listItem);
+
+    listItem.appendTo(parent)
 
     styleMyIngredients();
+
+    setupRemoveIngredientHandler();
   }
 
-  $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25',
-      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
-      data: {}, // Additional parameters here
-      dataType: 'json',
-      success: function(data) {
-        var dishes = {};
-        console.log(data.results);
-        dishes = data.results;
-        renderResults(dishes);
+
+  var init = function() {
+    $.ajaxSetup({
+      headers: { "X-Mashape-Key": "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS" }
+    });
+
+    $('#scotch-panel').scotchPanel({
+      containerSelector: 'body',
+      direction: 'right',
+      duration: 300,
+      transition: 'ease',
+      clickSelector: '.toggle-panel',
+      distanceX: '300px',
+      enableEscapeKey: true
+    });
+
+    $('.popup-modal').magnificPopup({
+  		type: 'inline',
+  		preloader: false,
+  		modal: true
+  	});
+
+  	$(document).on('click', '.popup-modal-dismiss', function (e) {
+  		e.preventDefault();
+  		$.magnificPopup.close();
+  	});
+
+    $.ajax({
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25',
+        type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          var dishes = {};
+          console.log(data.results);
+          dishes = data.results;
+          renderResults(dishes);
+        },
+        error: function(err) {
+          alert(err);
+        },
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+        }
+    });
+
+    $('#ingredients').autocomplete({
+      valueKey:'name',
+      limit: 12,
+      visibleLimit: 6,
+      source: [{
+        url:"https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=%QUERY%",
+        type:'remote'
+      }],
+      getTitle:function(item){
+        return item['name']
       },
-      error: function(err) {
-        alert(err);
-      },
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+      getValue:function(item){
+        return item['name']
       }
-  });
+    }).on('selected.xdsoft',function(e,datum){
+      currentItem = $("#ingredients").val();
+      if (!ingredientsList.includes(currentItem )) {
+        ingredientsList.push(currentItem );
+        $('#mainIngredients h3').hide()
+        $('#mainIngredients label').text("Add ingredient");
+        appendItem()
+      }
+    });
+  }
 
-  $('#ingredients').autocomplete({
-    valueKey:'name',
-    limit: 12,
-    visibleLimit: 6,
-    source: [{
-      url:"https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?metaInformation=false&number=10&query=%QUERY%",
-      type:'remote'
-    }],
-    getTitle:function(item){
-      return item['name']
-    },
-    getValue:function(item){
-      return item['name']
-    }
-  }).on('selected.xdsoft',function(e,datum){
-    currentItem = $("#ingredients").val();
-    if (!ingredientsList.includes(currentItem )) {
-      ingredientsList.push(currentItem );
-      $('#mainIngredients h3').hide();
-      appendItem()
-    }
-  });
-
-
+  init();
 });
