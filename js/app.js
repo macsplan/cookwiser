@@ -95,6 +95,16 @@ $(document).ready(function(){
     });
   }
 
+  var styleMyIngredients = function() {
+    $(".myIngredients li").removeClass("last");
+
+    var remainder = $(".myIngredients li").length % 2;
+
+    if (remainder > 0) {
+      $(".myIngredients li:last-child").addClass("last");
+    }
+  }
+
   var appendItem = function() {
     var ingredientsStr = ingredientsList.join(',');
     console.log(ingredientsStr);
@@ -104,13 +114,7 @@ $(document).ready(function(){
       .text(currentItem)
       .appendTo(parent);
 
-    $(".myIngredients li").removeClass("last");
-
-    var remainder = $(".myIngredients li").length % 2;
-
-    if (remainder > 0) {
-      $(".myIngredients li:last-child").addClass("last");
-    }
+    styleMyIngredients();
   }
 
   $.ajax({
