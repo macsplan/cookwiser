@@ -23,6 +23,12 @@ $(document).ready(function(){
             var line = $("<p/>")
               .text(ingredient.name)
               .appendTo($('.white-popup-block .ingredients'));
+            var instruction = $("<span/>")
+              .text(ingredient.originalString)
+              .appendTo(line);
+            var img = $("<img/>")
+              .attr("src", ingredient.image)
+              .appendTo(line);
           });
         },
         error: function(err) {
