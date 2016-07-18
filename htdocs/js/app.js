@@ -4,19 +4,27 @@ var currentItem;
 
 $(document).ready(function(){
 
-  var renderResults = function(dishes) {
-    var parent = $("#dishes");
+  var renderResults = function(items) {
+    var results = $("#results");
+    results.empty();
 
-    parent.empty();
+    var dishes = $('<div/>')
+      .attr("id", "dishes")
+      .addClass("grid");
 
-    dishes.forEach(function(dish) {
+    var gridSizer = $('<div/>')
+      .addClass("grid-sizer");
+
+    gridSizer.appendTo(dishes);
+
+    items.forEach(function(item) {
       var child = $('<div/>')
         .addClass("grid-item");
 
-      var linkname = (dish.title).replace(" ", "-");
+      var linkname = (item.title).replace(" ", "-");
 
       var link = $('<a/>')
-        .attr("data-id", dish.id)
+        .attr("data-id", item.id)
         .on("click", function(e) {
           e.preventDefault();
           var id = $(this).data("id");
@@ -41,14 +49,14 @@ $(document).ready(function(){
 
       var title = $('<p/>')
         .addClass("text-overlay")
-        .text(dish.title)
+        .text(item.title)
         .appendTo(link);
 
       var imgPath = "";
-      if (dish.image.indexOf("https") > -1) {
-        imgPath = dish.image;
+      if (item.image.indexOf("https") > -1) {
+        imgPath = item.image;
       } else {
-        imgPath = "https://webknox.com/recipeImages/" + dish.image;
+        imgPath = "https://webknox.com/recipeImages/" + item.image;
       }
 
       var img = $('<img/>')
@@ -57,21 +65,18 @@ $(document).ready(function(){
 
       link.appendTo(child);
 
-      child.appendTo(parent);
+      child.appendTo(dishes);
     });
 
-    var gridSizer = $('<div/>')
-      .addClass("grid-sizer");
+    dishes.appendTo(results);
 
-    dishes.appendTo(gridSizer);
+    var $grid = $('#dishes').masonry();
 
-    clickHandler();
-
-    var $grid = $('#dishes').masonry({
-    });
     $grid.imagesLoaded().progress( function() {
       $grid.masonry('layout');
     });
+
+    // $grid.masonry('reloadItems')
   }
 
   var styleMyIngredients = function() {
