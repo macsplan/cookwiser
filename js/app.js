@@ -79,17 +79,12 @@ $(document).ready(function(){
     }
   }
 
-
-  var setupRemoveIngredientHandler = function() {
-    $(".myIngredients li .remove").on("click", function(e) {
-      e.preventDefault();
-      console.log('clicked')
-    });
-  };
-
-  var appendItem = function() {
+  var convertToStr = function() {
     var ingredientsStr = ingredientsList.join(',');
     console.log(ingredientsStr);
+  }
+
+  var appendItem = function() {
     var parent = $(".myIngredients");
 
     var listItem = $('<li/>')
@@ -99,11 +94,22 @@ $(document).ready(function(){
       .addClass('remove')
       .appendTo(listItem);
 
+    remove.bind("click", function(e) {
+      var itemtoRemove = $(this).parent().text();
+      console.log(itemtoRemove);
+      var index = ingredientsList.indexOf(itemtoRemove);
+      if (index > -1) {
+        ingredientsList.splice(index, 1);
+      }
+      console.log(ingredientsList);
+      $(this).unbind("click");
+      $(this).parent().remove();
+      styleMyIngredients();
+    });
+
     listItem.appendTo(parent)
 
     styleMyIngredients();
-
-    setupRemoveIngredientHandler();
   }
 
 
