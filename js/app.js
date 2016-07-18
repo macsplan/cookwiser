@@ -17,6 +17,13 @@ $(document).ready(function(){
         success: function(data) {
           $('.white-popup-block h1').text(data.title);
           $('.white-popup-block img').attr('src', data.image);
+          $('.white-popup-block .ingredients').empty();
+          var ingredients = data.extendedIngredients;
+          ingredients.forEach(function(ingredient) {
+            var line = $("<p/>")
+              .text(ingredient.name)
+              .appendTo($('.white-popup-block .ingredients'));
+          });
         },
         error: function(err) {
           alert(err);
