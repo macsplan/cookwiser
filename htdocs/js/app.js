@@ -150,9 +150,9 @@ $(document).ready(function(){
     currentItem = $("#ingredients").val();
     if (!ingredientsList.includes(currentItem )) {
       ingredientsList.push(currentItem );
+      $('#mainIngredients h3').hide();
+      appendItem()
     }
-    $('#mainIngredients h3').hide();
-    appendItem()
   });
 
 
