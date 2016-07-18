@@ -4,34 +4,6 @@ var currentItem;
 
 $(document).ready(function(){
 
-  var clickHandler = function() {
-    $(".grid-item a").on("click", function(e) {
-      e.preventDefault();
-      var id = $(this).data("id");
-      console.log(id);
-
-      $.ajax({
-          url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
-          type: 'GET',
-          data: {}, // Additional parameters here
-          dataType: 'json',
-          success: function(data) {
-            console.log(data);
-            $('.popup-modal').magnificPopup('open');
-            $('.white-popup-block h1').text(data.title);
-          },
-          error: function(err) {
-            alert(err);
-          },
-          beforeSend: function(xhr) {
-            xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
-          }
-      });
-
-    });
-  };
-
-
   var renderResults = function(dishes) {
     var parent = $("#dishes");
 
@@ -44,8 +16,28 @@ $(document).ready(function(){
       var linkname = (dish.title).replace(" ", "-");
 
       var link = $('<a/>')
-        .attr("data-id", dish.id);
-        //.attr("href", "https://webknox.com/recipe/"+linkname+"-"+dish.id)
+        .attr("data-id", dish.id)
+        .on("click", function(e) {
+          e.preventDefault();
+          var id = $(this).data("id");
+          $.ajax({
+              url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
+              type: 'GET',
+              data: {}, // Additional parameters here
+              dataType: 'json',
+              success: function(data) {
+                console.log(data);
+                $('.popup-modal').magnificPopup('open');
+                $('.white-popup-block h1').text(data.title);
+              },
+              error: function(err) {
+                alert(err);
+              },
+              beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+              }
+          });
+        });
 
       var title = $('<p/>')
         .addClass("text-overlay")
