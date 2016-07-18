@@ -33,8 +33,9 @@ $(document).ready(function(){
 
 
   var renderResults = function(dishes) {
-
     var parent = $("#dishes");
+
+    parent.empty();
 
     dishes.forEach(function(dish) {
       var child = $('<div/>')
@@ -51,14 +52,26 @@ $(document).ready(function(){
         .text(dish.title)
         .appendTo(link);
 
+      var imgPath = "";
+      if (dish.image.indexOf("https") > -1) {
+        imgPath = dish.image;
+      } else {
+        imgPath = "https://webknox.com/recipeImages/" + dish.image;
+      }
+
       var img = $('<img/>')
-        .attr("src", "https://webknox.com/recipeImages/"+dish.image)
+        .attr("src", imgPath)
         .appendTo(link);
 
       link.appendTo(child);
 
       child.appendTo(parent);
     });
+
+    var gridSizer = $('<div/>')
+      .addClass("grid-sizer");
+
+    dishes.appendTo(gridSizer);
 
     clickHandler();
 
@@ -81,7 +94,24 @@ $(document).ready(function(){
 
   var convertToStr = function() {
     var ingredientsStr = ingredientsList.join(',');
-    console.log(ingredientsStr);
+    var parseStr = escape(ingredientsStr);
+    $.ajax({
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients='+parseStr+'&limitLicense=false&number=25&ranking=1',
+        type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          var dishes = {};
+          dishes = data;
+          renderResults(dishes);
+        },
+        error: function(err) {
+          alert(err);
+        },
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
+        }
+    });
   }
 
   var appendItem = function() {
@@ -101,7 +131,6 @@ $(document).ready(function(){
       if (index > -1) {
         ingredientsList.splice(index, 1);
       }
-      console.log(ingredientsList);
       $(this).unbind("click");
       $(this).parent().remove();
       styleMyIngredients();
@@ -110,6 +139,7 @@ $(document).ready(function(){
     listItem.appendTo(parent)
 
     styleMyIngredients();
+    convertToStr();
   }
 
 
@@ -146,7 +176,6 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data) {
           var dishes = {};
-          console.log(data.results);
           dishes = data.results;
           renderResults(dishes);
         },
