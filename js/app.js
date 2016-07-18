@@ -4,6 +4,24 @@ var currentItem;
 
 $(document).ready(function(){
 
+  var openDialog = function(id, data) {
+    $.ajax({
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
+        type: 'GET',
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('.popup-modal').magnificPopup('open');
+          $('.white-popup-block h1').text(data.title);
+          $('.white-popup-block img').attr('src', data.image);
+        },
+        error: function(err) {
+          alert(err);
+        }
+    });
+  }
+
   var appendDishesTo = function(items, element) {
     var dishes = $('<div/>')
       .attr("id", "dishes")
@@ -23,25 +41,7 @@ $(document).ready(function(){
         .attr("data-id", item.id)
         .on("click", function(e) {
           e.preventDefault();
-          var id = $(this).data("id");
-          $.ajax({
-              url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
-              type: 'GET',
-              data: {}, // Additional parameters here
-              dataType: 'json',
-              success: function(data) {
-                console.log(data);
-                $('.popup-modal').magnificPopup('open');
-                $('.white-popup-block h1').text(data.title);
-                $('.white-popup-block img').attr('src', data.image);
-              },
-              error: function(err) {
-                alert(err);
-              },
-              beforeSend: function(xhr) {
-                xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
-              }
-          });
+          openDialog($(this).data("id"), this);
         });
 
       var title = $('<p/>')
@@ -109,9 +109,6 @@ $(document).ready(function(){
         },
         error: function(err) {
           alert(err);
-        },
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
         }
     });
   }
@@ -174,21 +171,18 @@ $(document).ready(function(){
   	});
 
     $.ajax({
-        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25',
-        type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
-        data: {}, // Additional parameters here
-        dataType: 'json',
-        success: function(data) {
-          var dishes = {};
-          dishes = data.results;
-          renderResults(dishes);
-        },
-        error: function(err) {
-          alert(err);
-        },
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("X-Mashape-Authorization", mashapeKey); // Enter here your Mashape key
-        }
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25',
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(data) {
+        var dishes = {};
+        dishes = data.results;
+        renderResults(dishes);
+      },
+      error: function(err) {
+        alert(err);
+      }
     });
 
     $('#ingredients').autocomplete({
