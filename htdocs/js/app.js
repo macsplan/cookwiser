@@ -4,18 +4,14 @@ var currentItem;
 
 $(document).ready(function(){
 
-  var renderResults = function(items) {
-    var results = $("#results");
-    results.empty();
-
+  var appendDishesTo = function(items, element) {
     var dishes = $('<div/>')
       .attr("id", "dishes")
       .addClass("grid");
 
     var gridSizer = $('<div/>')
-      .addClass("grid-sizer");
-
-    gridSizer.appendTo(dishes);
+      .addClass("grid-sizer")
+      .appendTo(dishes);
 
     items.forEach(function(item) {
       var child = $('<div/>')
@@ -37,6 +33,7 @@ $(document).ready(function(){
                 console.log(data);
                 $('.popup-modal').magnificPopup('open');
                 $('.white-popup-block h1').text(data.title);
+                $('.white-popup-block img').attr('src', data.image);
               },
               error: function(err) {
                 alert(err);
@@ -64,21 +61,28 @@ $(document).ready(function(){
         .appendTo(link);
 
       link.appendTo(child);
-
       child.appendTo(dishes);
     });
 
-    dishes.appendTo(results);
+    dishes.appendTo(element);
+  }
+
+
+  // render results
+  var renderResults = function(items) {
+    var results = $("#results");
+    results.empty();
+
+    appendDishesTo(items, results)
 
     var $grid = $('#dishes').masonry();
 
     $grid.imagesLoaded().progress( function() {
       $grid.masonry('layout');
     });
-
-    // $grid.masonry('reloadItems')
   }
 
+  // style ingredients in filter
   var styleMyIngredients = function() {
     $(".myIngredients li").removeClass("last");
 
@@ -89,7 +93,8 @@ $(document).ready(function(){
     }
   }
 
-  var convertToStr = function() {
+  // search by ingredients
+  var searchByIngredients = function() {
     var ingredientsStr = ingredientsList.join(',');
     var parseStr = escape(ingredientsStr);
     $.ajax({
@@ -111,7 +116,8 @@ $(document).ready(function(){
     });
   }
 
-  var appendItem = function() {
+  // add ingredient to filter
+  var addIngredientToFilter = function() {
     var parent = $(".myIngredients");
 
     var listItem = $('<li/>')
@@ -123,7 +129,6 @@ $(document).ready(function(){
 
     remove.bind("click", function(e) {
       var itemtoRemove = $(this).parent().text();
-      console.log(itemtoRemove);
       var index = ingredientsList.indexOf(itemtoRemove);
       if (index > -1) {
         ingredientsList.splice(index, 1);
@@ -131,15 +136,17 @@ $(document).ready(function(){
       $(this).unbind("click");
       $(this).parent().remove();
       styleMyIngredients();
+      searchByIngredients();
     });
 
     listItem.appendTo(parent)
 
     styleMyIngredients();
-    convertToStr();
+    searchByIngredients();
   }
 
 
+  // init
   var init = function() {
     $.ajaxSetup({
       headers: { "X-Mashape-Key": "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS" }
@@ -204,10 +211,11 @@ $(document).ready(function(){
         ingredientsList.push(currentItem );
         $('#mainIngredients h3').hide()
         $('#mainIngredients label').text("Add ingredient");
-        appendItem()
+        addIngredientToFilter()
       }
     });
   }
 
   init();
+
 });
