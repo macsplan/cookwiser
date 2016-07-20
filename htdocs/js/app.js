@@ -110,9 +110,15 @@ $(document).ready(function(){
   offsetAmount = getRandomInt(0, 800);
 
   var filterDishes = function() {
-    if (mealTime === "") {
-      var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?fillIngredients=false&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+mealTime
-    }
+    // if ((mealTime == "") && (cuisineType == "")) {
+    //   var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?fillIngredients=false&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+mealTime+"'"
+    // } else if (cuisineType == "") {
+    //   var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?fillIngredients=false&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+mealTime+"'"
+    // } else {
+      var url =       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+encodeURI(mealTime);
+
+
+    // }
 
     $.ajax({
         url: url,
@@ -240,8 +246,8 @@ $(document).ready(function(){
       filterDishes();
     });
     $( "select[name=mealTime]" ).change(function() {
-      var timeOfMeal = $("select[name=cuisine] option:selected").val();
-      mealTime = 'cuisine='+timeOfMeal;
+      var timeOfMeal = $("select[name=mealTime] option:selected").val();
+      mealTime = timeOfMeal;
       filterDishes();
     });
   }
