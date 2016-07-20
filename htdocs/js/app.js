@@ -2,6 +2,7 @@ var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
 var ingredientsList = [];
 var currentItem;
 var offsetAmount;
+var convertIngtoStr = "";
 var cuisineType = "";
 var mealTime = "";
 
@@ -110,14 +111,34 @@ $(document).ready(function(){
   offsetAmount = getRandomInt(0, 800);
 
   var filterDishes = function() {
-    // if ((mealTime == "") && (cuisineType == "")) {
-    //   var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?fillIngredients=false&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+mealTime+"'"
-    // } else if (cuisineType == "") {
-    //   var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?fillIngredients=false&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+mealTime+"'"
-    // } else {
-      var url =       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+encodeURI(mealTime);
+    var url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&number=100&offset=0&query=recipe&ranking=1";
 
+    if (!mealTime == "") {
+      url = url + "&type="+mealTime;
+    }
 
+    if (!cuisineType == "") {
+      url = url + "&cuisine="+encodeURI(cuisineType);
+    }
+
+    if (!convertIngtoStr == "") {
+      url = url + "&includeIngredients="+convertIngtoStr;
+    }
+
+//      else {
+//       var url =
+//       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?includeIngredients='+convertIngtoStr+'&'
+//     }
+//
+// &includeIngredients='+convertIngtoStr+'apple&limitLicense=false&number=100&offset=0&query=recipe&ranking=1'
+//     if  ((!mealTime == "") && (!convertIngtoStr == "")) {
+//       var url =
+//       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?includeIngredients='+convertIngtoStr+'&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+encodeURI(mealTime);
+//     }
+//
+//     if (!mealTime == "") {
+//       var url =       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+encodeURI(mealTime);
+//     }
     // }
 
     $.ajax({
@@ -235,14 +256,14 @@ $(document).ready(function(){
   // search by ingredients
   var searchByIngredients = function() {
     var ingredientsStr = ingredientsList.join(',');
-    var convertIngtoStr = escape(ingredientsStr);
+    convertIngtoStr = escape(ingredientsStr);
     filterDishes();
   }
 
   var searchFilter = function() {
     $( "select[name=cuisine]" ).change(function() {
       var cuisineChoosen = $("select[name=cuisine] option:selected").val();
-      cuisineType = 'cuisine='+cuisineChoosen;
+      cuisineType = cuisineChoosen;
       filterDishes();
     });
     $( "select[name=mealTime]" ).change(function() {
@@ -252,15 +273,9 @@ $(document).ready(function(){
     });
   }
 
-  // search by ingredients
-  var searchByIngredients = function() {
-    var ingredientsStr = ingredientsList.join(',');
-    var convertIngtoStr = escape(ingredientsStr);
-    filterDishes();
-  }
-
   // add ingredient to filter
   var addIngredientToFilter = function() {
+    $('.hidefilter').show();
     var parent = $(".myIngredients");
 
     var listItem = $('<li/>')

@@ -629,6 +629,9 @@ img.mfp-img {
         #test-modal #method .method ol li {
           margin-bottom: 1em; }
 
+.hidefilter {
+  display: none; }
+
 select {
   background: transparent;
   border: 2px solid #ca3763;
