@@ -1,6 +1,9 @@
 var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
 var ingredientsList = [];
 var currentItem;
+var offsetAmount;
+var cuisineType = "";
+var mealTime = "";
 
 $(document).ready(function(){
 
@@ -9,28 +12,6 @@ $(document).ready(function(){
     $('.popup-modal').magnificPopup('open');
 
     var resizeImages = function() {
-      $('.white-popup-block img').each(function() {
-        var maxWidth = 1000; // Max width for the image
-        var maxHeight = '60vh';    // Max height for the image
-        var ratio = 0;  // Used for aspect ratio
-        var width = $(this).width();    // Current image width
-        var height = $(this).height();  // Current image height
-
-        // Check if the current width is larger than the max
-        if(width > maxWidth){
-            $(this).css("height", '100%');  // Scale height based on ratio
-            // height = height * ratio;    // Reset height to match scaled image
-            // width = width * ratio;    // Reset width to match scaled image
-        }
-
-        // Check if current height is larger than max
-        if(height > maxHeight){
-            ratio = maxHeight / height; // get ratio for scaling image
-            $(this).css("height", maxHeight);   // Set new height
-            // $(this).css("width", width * ratio);    // Scale width based on ratio
-            // width = width * ratio;    // Reset width to match scaled image
-        }
-    });
     }
 
     // get recipe information
@@ -46,7 +27,7 @@ $(document).ready(function(){
           $('.white-popup-block .serving span em').empty();
           $('.white-popup-block .serving span em').text(data.servings);
           $('.white-popup-block .ready_in span em ').empty();
-          $('.white-popup-block .ready_in span').text('ready in '+data.readyInMinutes+ " minutes");
+          $('.white-popup-block .ready_in span em').text(data.readyInMinutes+ " minutes");
 
 
           $('.white-popup-block .ingredients').empty();
@@ -66,6 +47,23 @@ $(document).ready(function(){
           alert(err);
         }
     });
+
+    // get recipe summary
+
+    $.ajax({
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/summary',
+        type: 'GET',
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('.white-popup-block .summary').html(data.summary);
+        },
+        error: function(err) {
+          alert(err);
+        }
+    });
+
 
     // get recipe instructions
     $.ajax({
@@ -92,7 +90,7 @@ $(document).ready(function(){
 
               var link = $("<a/>")
               .attr("href", "https://spoonacular.com/recipes/"+linkname+"-"+id)
-              .text("Read the detailed instructions on");
+              .text("Read the detailed instructions here");
 
               link.appendTo(ol);
           }
@@ -104,6 +102,57 @@ $(document).ready(function(){
         }
     });
   }
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  offsetAmount = getRandomInt(0, 800);
+
+  var filterDishes = function() {
+    if (mealTime === "") {
+      var url = 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?fillIngredients=false&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+mealTime
+    }
+
+    $.ajax({
+        url: url,
+        type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          var dishes = {};
+          dishes = data.results;
+          renderResults(dishes);
+
+          if (data.length === 0) {
+            $('#mainIngredients label').text("Main Ingredient");
+            offsetAmount = getRandomInt(0, 800);
+            loadDishes();
+          }
+        },
+        error: function(err) {
+          alert(err);
+        }
+    });
+  }
+
+  var loadDishes = function() {
+    $.ajax({
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=100&offset='+offsetAmount,
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(data) {
+        var dishes = {};
+        dishes = data.results;
+        renderResults(dishes);
+      },
+      error: function(err) {
+        alert(err);
+      }
+    });
+  }
+
 
   var appendDishesTo = function(items, element) {
     var dishes = $('<div/>')
@@ -180,21 +229,28 @@ $(document).ready(function(){
   // search by ingredients
   var searchByIngredients = function() {
     var ingredientsStr = ingredientsList.join(',');
-    var parseStr = escape(ingredientsStr);
-    $.ajax({
-        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients='+parseStr+'&limitLicense=false&number=25&ranking=1',
-        type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
-        data: {}, // Additional parameters here
-        dataType: 'json',
-        success: function(data) {
-          var dishes = {};
-          dishes = data;
-          renderResults(dishes);
-        },
-        error: function(err) {
-          alert(err);
-        }
+    var convertIngtoStr = escape(ingredientsStr);
+    filterDishes();
+  }
+
+  var searchFilter = function() {
+    $( "select[name=cuisine]" ).change(function() {
+      var cuisineChoosen = $("select[name=cuisine] option:selected").val();
+      cuisineType = 'cuisine='+cuisineChoosen;
+      filterDishes();
     });
+    $( "select[name=mealTime]" ).change(function() {
+      var timeOfMeal = $("select[name=cuisine] option:selected").val();
+      mealTime = 'cuisine='+timeOfMeal;
+      filterDishes();
+    });
+  }
+
+  // search by ingredients
+  var searchByIngredients = function() {
+    var ingredientsStr = ingredientsList.join(',');
+    var convertIngtoStr = escape(ingredientsStr);
+    filterDishes();
   }
 
   // add ingredient to filter
@@ -239,7 +295,7 @@ $(document).ready(function(){
       duration: 300,
       transition: 'ease',
       clickSelector: '.toggle-panel',
-      distanceX: '300px',
+      distanceX: '320px',
       enableEscapeKey: true
     });
 
@@ -254,20 +310,7 @@ $(document).ready(function(){
   		$.magnificPopup.close();
   	});
 
-    $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=25',
-      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
-      data: {}, // Additional parameters here
-      dataType: 'json',
-      success: function(data) {
-        var dishes = {};
-        dishes = data.results;
-        renderResults(dishes);
-      },
-      error: function(err) {
-        alert(err);
-      }
-    });
+    // loadDishes();
 
     $('#ingredients').autocomplete({
       valueKey:'name',
@@ -292,6 +335,8 @@ $(document).ready(function(){
         addIngredientToFilter()
       }
     });
+
+    searchFilter();
   }
 
   init();

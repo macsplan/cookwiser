@@ -52,10 +52,14 @@ article {
     padding: 1%;
     form {
       color: #fff;
+      padding: 1em 0;
       label {
         font-size: 12px;
+        width: 95px;
+        display: inline-block;
       }
       h3 {
+        margin-top: 0;
         font-weight: normal;
       }
     }
@@ -79,8 +83,8 @@ article {
 }
 
 #ingredients {
-  width: 180px;
-  margin-left: 1em;
+  width: 191px;
+  // margin-left: 1em;
   border-radius: 2em;
   outline: none;
   border-color: #ca3763;
@@ -100,6 +104,8 @@ article {
     width: 100%;
   }
 }
+
+
 .remove {
   cursor: pointer;
   height: 0 !important;
@@ -150,6 +156,18 @@ article {
 
 * { box-sizing: border-box; }
 
+
+.popup-modal-dismiss {
+  position: relative;
+  top: 1em;
+  left: 3%;
+  float: left;
+  background-color: #ca3763;
+  padding: 17px;
+  color: #fff;
+  border-radius: 10px;
+}
+
 /* force scrollbar */
 html { overflow-y: scroll; }
 
@@ -157,9 +175,6 @@ body { font-family: sans-serif; }
 
 /* ---- grid ---- */
 
-.grid {
-  background: #DDD;
-}
 
 /* clear fix */
 .grid:after {
@@ -541,24 +556,36 @@ img.mfp-img {
   #test-modal {
     background-image: url("../img/choppingboard.jpg");
     text-align: center;
+    height: 100%;
+    h1 {
+      width: 90%;
+      margin-left: 10%;
+    }
     .imageRow {
       background-color: #fff;
       border-top: 5px solid #613594;
-      height: 100vh;
-      max-height: 66vh;
       border-bottom: 10px solid #ca3763;
+      height: 60vh;
+      img {
+        height: 100%;
+        max-height: 100%;
+        max-width: 100%;
+      }
     }
     #method {
       background-color: white;
       width: 90%;
       margin: 2% auto;
       padding-top: 5px;
+      height: 100%;
       .recipe_guide {
-        float: right;
-        width: 400px;
+        width: 60%;
+        margin-left: 40%;
+        text-align: right;
+        padding: 2%;
         .serving, .ready_in  {
-            width: 120px;
-            display: inline-block;
+            display: inline;
+            text-align: left;
             .fa {
               background-color: #bebebe;
               padding: 5px 8px;
@@ -577,12 +604,16 @@ img.mfp-img {
               font-size: 1.4em;;
             }
         }
-        .ready_in {
-          width: 180px;
+        .serving {
+          padding-right: 10px;
         }
       }
+      .summary {
+        margin: 3.5% 2.5%;
+        text-align: left;
+      }
 
-      .ingredient_label {
+      .ingredient_label, .directions_label {
         font-family: "PT Mono";
         background-color: #613594;
         width: 200px;
@@ -590,7 +621,6 @@ img.mfp-img {
         text-transform: uppercase;
         font-size: 1.3em;
         padding: 4px;
-        margin-top: 5%;
       }
       .ingredients {
         padding: 2%;
@@ -614,8 +644,135 @@ img.mfp-img {
           }
         }
       }
+      .method {
+        margin: 3.5% 2.5%;
+        text-align: left;
+        ol {
+          width: 98%;
+          color: black;
+          a {
+            color: black;
+          }
+          li {
+            margin-bottom: 1em;
+          }
+        }
+      }
     }
   }
+
+select {
+  background: transparent;
+  border: 2px solid #ca3763;
+  outline: none;
+  font-size: 11px;
+  height: 27px;
+  -webkit-appearance: none !important;
+  -webkit-border-radius: 0px;
+  padding: 5px 9px;
+}
+
+.styled-select {
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 92% 50%;
+  height: 29px;
+  overflow: hidden;
+  width: 191px;
+  select {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 29px;
+    -webkit-appearance: none !important;
+    -webkit-border-radius: 0px;
+    padding: 5px 9px;
+    /* If you add too much padding here, the options won't show in IE */
+  }
+}
+
+/* -------------------- Rounded Corners */
+
+.rounded {
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  border-radius: 20px !important;
+  background-color: #fff;
+}
+
+
+#mainselection {
+  select {
+    border: 0;
+    color: #EEE;
+    background: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 2px 10px;
+    width: 378px;
+    *width: 350px;
+    *background: #58B14C;
+    -webkit-appearance: none;
+  }
+  overflow: hidden;
+  width: 350px;
+  -moz-border-radius: 9px 9px 9px 9px;
+  -webkit-border-radius: 9px 9px 9px 9px;
+  border-radius: 9px 9px 9px 9px;
+  box-shadow: 1px 1px 11px #330033;
+  background: #58B14C url("http://i62.tinypic.com/15xvbd5.png") no-repeat scroll 319px center;
+}
+
+/* -------------------- Select Box Styles: stackoverflow.com Method */
+/* -------------------- Source: http://stackoverflow.com/a/5809186 */
+
+select {
+  &#soflow {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 300px;
+  }
+  &#soflow-color {
+    -webkit-appearance: button;
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -webkit-user-select: none;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: 97% center;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 20px;
+    overflow: hidden;
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 300px;
+    color: #fff;
+    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
+    background-color: #779126;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding-left: 15px;
+  }
+}
 
 
 @media (max-width: 400px) {
@@ -630,8 +787,32 @@ img.mfp-img {
   .grid-item {
     width: 50%;
   }
+  #test-modal {
+    h1 {
+      font-size: 1.5em;
+    }
+    .imageRow {
+      height: 45vh;
+    }
+  }
+  .popup-modal-dismiss {
+    padding: 10px;
+  }
 }
 
+@media (max-width: 450px) {
+  #test-modal #method .recipe_guide {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #test-modal #method .recipe_guide {
+    width: 80%;
+    margin-left: 20%;
+  }
+}
 
 @media (min-width: 501px) and (max-width: 900px) {
   .grid-sizer,
