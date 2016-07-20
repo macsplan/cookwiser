@@ -7,6 +7,59 @@ var cuisineType = "";
 var mealTime = "";
 var foodIntolerance = "";
 
+
+var createPDF = function() {
+  var doc = new jsPDF();
+  var selectPara = $('#test-modal .ingredients p');
+
+  doc.setFontSize(18);
+  doc.text(20, 20, $('#test-modal h1').text());
+
+  var y = 30;
+
+  selectPara.each(function(idx, p) {
+    var line = $(p).find('span').text();
+    y = y + 10;
+    console.log(line);
+    doc.setFontSize(12);
+    doc.text(20, y, line);
+  });
+
+  // for (i = 0; i < selectPara.length ; i++) {
+  //   console.log(selectPara)
+  //   var currentItem = $(this).find('span').text();
+  //   console.log(currentItem);
+  //   console.log("The number is " + i + "<br>");
+  //   // doc.text(20, 30, $('#test-modal .ingredients p span').text());
+  //   // console.log($('#test-modal .ingredients p span').text());
+  // }
+
+  // console.log(selectPara)
+
+  // doc.setFontSize(12);
+  // doc.text(20, 30, $('#test-modal .ingredients').text());
+
+
+  // doc.text(20, 30, 'This is the default font.');
+  //
+  // doc.setFont("courier");
+  // doc.setFontType("normal");
+  // doc.text(20, 40, 'This is courier normal.');
+  //
+  // doc.setFont("times");
+  // doc.setFontType("italic");
+  // doc.text(20, 50, 'This is times italic.');
+  //
+  // doc.setFont("helvetica");
+  // doc.setFontType("bold");
+  // doc.text(20, 50, 'This is helvetica bold.');
+  //
+  // doc.setFont("courier");
+  // doc.setFontType("bolditalic");
+
+  doc.save('test.pdf');
+}
+
 $(document).ready(function(){
 
   var openDialog = function(id, linkname, data) {
@@ -352,8 +405,14 @@ $(document).ready(function(){
     });
 
     searchFilter();
+
+    $('#create_pdf').on('click',function(){
+     createPDF();
+    });
   }
 
   init();
+
+
 
 });
