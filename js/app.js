@@ -5,6 +5,7 @@ var offsetAmount;
 var convertIngtoStr = "";
 var cuisineType = "";
 var mealTime = "";
+var foodIntolerance = "";
 
 $(document).ready(function(){
 
@@ -125,6 +126,10 @@ $(document).ready(function(){
       url = url + "&includeIngredients="+convertIngtoStr;
     }
 
+    if (!foodIntolerance == "") {
+      url = url + "&intolerances="+foodIntolerance;
+    }
+
     $.ajax({
         url: url,
         type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
@@ -135,7 +140,7 @@ $(document).ready(function(){
           dishes = data.results;
           renderResults(dishes);
 
-          if (data.length === 0) {
+          if (data.results.length === 0) {
             $('#mainIngredients label').text("Main Ingredient");
             offsetAmount = getRandomInt(0, 800);
             loadDishes();
@@ -253,6 +258,11 @@ $(document).ready(function(){
     $( "select[name=mealTime]" ).change(function() {
       var timeOfMeal = $("select[name=mealTime] option:selected").val();
       mealTime = timeOfMeal;
+      filterDishes();
+    });
+    $( "select[name=foodIntolerance]" ).change(function() {
+      var foodInt = $("select[name=foodIntolerance] option:selected").val();
+      foodIntolerance = foodInt;
       filterDishes();
     });
   }
