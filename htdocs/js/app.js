@@ -125,22 +125,6 @@ $(document).ready(function(){
       url = url + "&includeIngredients="+convertIngtoStr;
     }
 
-//      else {
-//       var url =
-//       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?includeIngredients='+convertIngtoStr+'&'
-//     }
-//
-// &includeIngredients='+convertIngtoStr+'apple&limitLicense=false&number=100&offset=0&query=recipe&ranking=1'
-//     if  ((!mealTime == "") && (!convertIngtoStr == "")) {
-//       var url =
-//       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?includeIngredients='+convertIngtoStr+'&limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+encodeURI(mealTime);
-//     }
-//
-//     if (!mealTime == "") {
-//       var url =       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&number=100&offset=0&query=recipe&ranking=1&type='+encodeURI(mealTime);
-//     }
-    // }
-
     $.ajax({
         url: url,
         type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
