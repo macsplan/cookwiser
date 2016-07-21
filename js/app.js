@@ -28,18 +28,18 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data) {
           $('.white-popup-block h1').text(data.title);
-          $('.white-popup-block img').attr('src', data.image);
+          $('.white-popup-block .imageRow img').attr('src', data.image);
           $('.white-popup-block .serving span em').empty();
           $('.white-popup-block .serving span em').text(data.servings);
           $('.white-popup-block .ready_in span em ').empty();
           $('.white-popup-block .ready_in span em').text(data.readyInMinutes+ " minutes");
           $('.white-popup-block .cardIntro em').text( data.title);
 
-          $('.white-popup-block .ingredients').empty();
+          $('.white-popup-block .ingredients .list').empty();
           var ingredients = data.extendedIngredients;
           ingredients.forEach(function(ingredient) {
             var line = $("<p/>")
-              .appendTo($('.white-popup-block .ingredients'));
+              .appendTo($('.white-popup-block .ingredients .list'));
             var img = $("<img/>")
               .attr("src", ingredient.image)
               .appendTo(line);

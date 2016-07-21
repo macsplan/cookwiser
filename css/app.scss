@@ -15,17 +15,15 @@ header {
     position: relative;
     background: #819c05;
     height: 50px;
-}
-header a {
-    color: #777;
+    text-align: center;
 }
 header a:hover {
     color: #fff;
 }
 header .logo {
     display: inline-block;
-    height: 50px;
-    line-height: 50px;
+    width: 218px;
+    padding: 2px;
 }
 header .toggle-panel {
     position: absolute;
@@ -613,8 +611,7 @@ img.mfp-img {
     #print {
       background-color: white;
       .cardIntro {
-        background-color: white;
-        max-width: 800px;
+        background-color: #fff;
         margin: 2%;
         padding: 3%;
         font-family: "PT Mono";
@@ -671,7 +668,7 @@ img.mfp-img {
         }
       }
       .summary {
-        margin: 3.5% 2.5% 0;
+        margin: 2% 2.5% 0;
         text-align: left;
         background-color: white !important;
       }
@@ -690,7 +687,7 @@ img.mfp-img {
         border: 2px dashed #829c05;
         margin: 3% 5% 5%;
         border-radius: 30px;
-        text-align: left;
+        text-align: center;
         p {
           width: 100px;
           display: inline-block;

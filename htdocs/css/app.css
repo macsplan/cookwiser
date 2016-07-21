@@ -14,18 +14,16 @@ a {
 header {
   position: relative;
   background: #819c05;
-  height: 50px; }
-
-header a {
-  color: #777; }
+  height: 50px;
+  text-align: center; }
 
 header a:hover {
   color: #fff; }
 
 header .logo {
   display: inline-block;
-  height: 50px;
-  line-height: 50px; }
+  width: 218px;
+  padding: 2px; }
 
 header .toggle-panel {
   position: absolute;
@@ -594,8 +592,7 @@ img.mfp-img {
   #test-modal #print {
     background-color: white; }
     #test-modal #print .cardIntro {
-      background-color: white;
-      max-width: 800px;
+      background-color: #fff;
       margin: 2%;
       padding: 3%;
       font-family: "PT Mono";
@@ -642,7 +639,7 @@ img.mfp-img {
         background-color: white;
         padding-right: 10px; }
     #test-modal #method .summary {
-      margin: 3.5% 2.5% 0;
+      margin: 2% 2.5% 0;
       text-align: left;
       background-color: white !important; }
     #test-modal #method .ingredient_label, #test-modal #method .directions_label {
@@ -658,7 +655,7 @@ img.mfp-img {
       border: 2px dashed #829c05;
       margin: 3% 5% 5%;
       border-radius: 30px;
-      text-align: left; }
+      text-align: center; }
       #test-modal #method .ingredients p {
         width: 100px;
         display: inline-block;
