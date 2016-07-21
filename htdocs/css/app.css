@@ -2,7 +2,8 @@
 =            SITE STUFF            =
 ==================================*/
 .scotchified {
-  background-image: url("../img/choppingboard.jpg"); }
+  background-image: url("../img/choppingboard.jpg");
+  margin: 0; }
 
 a {
   text-decoration: none !important;
@@ -45,7 +46,7 @@ article {
 ====================================*/
 #scotch-panel {
   background-color: rgba(0, 0, 0, 0.7);
-  padding: 1%; }
+  padding: 10px; }
   #scotch-panel form {
     color: #fff;
     padding: 1em 0; }
@@ -117,6 +118,35 @@ article {
 
 .xdsoft_autocomplete .xdsoft_autocomplete_dropdown > div.active {
   background-color: #819c05 !important; }
+
+.content {
+  text-align: center; }
+  .content h1 {
+    color: #ca3763;
+    font-family: "PT Mono";
+    text-transform: uppercase;
+    font-size: 2em; }
+  .content .intro {
+    padding: 0 1% 1%;
+    line-height: 1.5em; }
+  .content .filter-cta {
+    background-color: #819c05;
+    text-transform: uppercase;
+    font-family: "PT Mono";
+    color: #fff;
+    width: 95%;
+    margin: 2% 2% 6%;
+    text-align: left; }
+    .content .filter-cta .fa {
+      font-size: 2em;
+      color: white;
+      padding: 4%; }
+    .content .filter-cta p {
+      font-size: 0.82em;
+      display: inline-block;
+      vertical-align: top;
+      padding-top: 3%;
+      margin-left: -10px; }
 
 #dishes .grid-item .text-overlay {
   position: absolute;
@@ -545,6 +575,7 @@ img.mfp-img {
 
 #test-modal {
   background-image: url("../img/choppingboard.jpg");
+  background-color: white;
   text-align: center;
   height: 100%; }
   #test-modal h1 {
@@ -558,9 +589,27 @@ img.mfp-img {
     #test-modal .imageRow img {
       height: 100%;
       max-height: 100%;
-      max-width: 100%; }
+      max-width: 100%;
+      background-color: white; }
+  #test-modal #print {
+    background-color: white; }
+    #test-modal #print .cardIntro {
+      background-color: white;
+      max-width: 800px;
+      margin: 2%;
+      padding: 3%;
+      font-family: "PT Mono";
+      color: #ca3763;
+      margin: 0 auto; }
+      #test-modal #print .cardIntro span {
+        background-color: white;
+        font-size: 2em; }
+      #test-modal #print .cardIntro em {
+        background-color: white;
+        font-style: normal;
+        font-size: 1.5em; }
   #test-modal #method {
-    background-color: white;
+    background-color: white !important;
     width: 90%;
     margin: 2% auto;
     padding-top: 5px;
@@ -569,9 +618,11 @@ img.mfp-img {
       width: 60%;
       margin-left: 40%;
       text-align: right;
+      background-color: white !important;
       padding: 2%; }
       #test-modal #method .recipe_guide .serving, #test-modal #method .recipe_guide .ready_in {
         display: inline;
+        background-color: white;
         text-align: left; }
         #test-modal #method .recipe_guide .serving .fa, #test-modal #method .recipe_guide .ready_in .fa {
           background-color: #bebebe;
@@ -588,10 +639,12 @@ img.mfp-img {
           font-style: normal;
           font-size: 1.4em; }
       #test-modal #method .recipe_guide .serving {
+        background-color: white;
         padding-right: 10px; }
     #test-modal #method .summary {
-      margin: 3.5% 2.5%;
-      text-align: left; }
+      margin: 3.5% 2.5% 0;
+      text-align: left;
+      background-color: white !important; }
     #test-modal #method .ingredient_label, #test-modal #method .directions_label {
       font-family: "PT Mono";
       background-color: #613594;
@@ -628,6 +681,14 @@ img.mfp-img {
           color: black; }
         #test-modal #method .method ol li {
           margin-bottom: 1em; }
+    #test-modal #method #create_pdf {
+      background-color: #819c05;
+      padding: 17px;
+      color: #fff;
+      border-radius: 10px;
+      max-width: 223px;
+      margin: 0 auto;
+      margin-bottom: 4%; }
 
 .hidefilter {
   display: none; }
@@ -664,25 +725,17 @@ select {
   border-radius: 20px !important;
   background-color: #fff; }
 
-#mainselection {
-  overflow: hidden;
-  width: 350px;
-  -moz-border-radius: 9px 9px 9px 9px;
-  -webkit-border-radius: 9px 9px 9px 9px;
-  border-radius: 9px 9px 9px 9px;
-  box-shadow: 1px 1px 11px #330033;
-  background: #58B14C url("http://i62.tinypic.com/15xvbd5.png") no-repeat scroll 319px center; }
-  #mainselection select {
-    border: 0;
-    color: #EEE;
-    background: transparent;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 2px 10px;
-    width: 378px;
-    *width: 350px;
-    *background: #58B14C;
-    -webkit-appearance: none; }
+#mainselection select {
+  border: 0;
+  color: #EEE;
+  background: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 2px 10px;
+  width: 378px;
+  *width: 350px;
+  *background: #58B14C;
+  -webkit-appearance: none; }
 
 /* -------------------- Select Box Styles: stackoverflow.com Method */
 /* -------------------- Source: http://stackoverflow.com/a/5809186 */
@@ -736,9 +789,20 @@ select#soflow-color {
 @media (max-width: 400px) {
   .grid-sizer,
   .grid-item {
-    width: 100%; } }
+    width: 100% !important; } }
 
-@media (max-width: 500px) {
+@media (min-width: 450px) {
+  .filter-cta {
+    max-width: 425px;
+    margin-bottom: 3% !important; }
+    .filter-cta .fa {
+      font-size: 3em !important;
+      padding: 2% 4% !important; }
+    .filter-cta p {
+      font-size: 1.2em !important;
+      padding-top: 1% !important; } }
+
+@media (max-width: 600px) {
   .grid-sizer,
   .grid-item {
     width: 50%; }
@@ -759,7 +823,7 @@ select#soflow-color {
     width: 80%;
     margin-left: 20%; } }
 
-@media (min-width: 501px) and (max-width: 900px) {
+@media (min-width: 601px) and (max-width: 900px) {
   .grid-sizer,
   .grid-item {
     width: 33.3333%; } }

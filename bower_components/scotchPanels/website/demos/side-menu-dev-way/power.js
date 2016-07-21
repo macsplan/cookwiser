@@ -7,6 +7,7 @@ $(function() {
         transition: 'ease',
         distanceX: '70%',
         enableEscapeKey: true
+        $('.toggle-panel i').removeClass('fa-bars').addClass('fa-times');
     });
 
     $('.toggle-panel').click(function() {

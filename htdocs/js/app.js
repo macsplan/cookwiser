@@ -7,57 +7,11 @@ var cuisineType = "";
 var mealTime = "";
 var foodIntolerance = "";
 
-
 var createPDF = function() {
-  var doc = new jsPDF();
-  var selectPara = $('#test-modal .ingredients p');
-
-  doc.setFontSize(18);
-  doc.text(20, 20, $('#test-modal h1').text());
-
-  var y = 30;
-
-  selectPara.each(function(idx, p) {
-    var line = $(p).find('span').text();
-    y = y + 10;
-    console.log(line);
-    doc.setFontSize(12);
-    doc.text(20, y, line);
+  var pdf = new jsPDF('p', 'pt', 'letter');
+    pdf.addHTML($('#print').get(0), function () {
+    pdf.save('Recipe Card.pdf');
   });
-
-  // for (i = 0; i < selectPara.length ; i++) {
-  //   console.log(selectPara)
-  //   var currentItem = $(this).find('span').text();
-  //   console.log(currentItem);
-  //   console.log("The number is " + i + "<br>");
-  //   // doc.text(20, 30, $('#test-modal .ingredients p span').text());
-  //   // console.log($('#test-modal .ingredients p span').text());
-  // }
-
-  // console.log(selectPara)
-
-  // doc.setFontSize(12);
-  // doc.text(20, 30, $('#test-modal .ingredients').text());
-
-
-  // doc.text(20, 30, 'This is the default font.');
-  //
-  // doc.setFont("courier");
-  // doc.setFontType("normal");
-  // doc.text(20, 40, 'This is courier normal.');
-  //
-  // doc.setFont("times");
-  // doc.setFontType("italic");
-  // doc.text(20, 50, 'This is times italic.');
-  //
-  // doc.setFont("helvetica");
-  // doc.setFontType("bold");
-  // doc.text(20, 50, 'This is helvetica bold.');
-  //
-  // doc.setFont("courier");
-  // doc.setFontType("bolditalic");
-
-  doc.save('test.pdf');
 }
 
 $(document).ready(function(){
@@ -65,9 +19,6 @@ $(document).ready(function(){
   var openDialog = function(id, linkname, data) {
 
     $('.popup-modal').magnificPopup('open');
-
-    var resizeImages = function() {
-    }
 
     // get recipe information
     $.ajax({
@@ -78,12 +29,11 @@ $(document).ready(function(){
         success: function(data) {
           $('.white-popup-block h1').text(data.title);
           $('.white-popup-block img').attr('src', data.image);
-          resizeImages();
           $('.white-popup-block .serving span em').empty();
           $('.white-popup-block .serving span em').text(data.servings);
           $('.white-popup-block .ready_in span em ').empty();
           $('.white-popup-block .ready_in span em').text(data.readyInMinutes+ " minutes");
-
+          $('.white-popup-block .cardIntro em').text( data.title);
 
           $('.white-popup-block .ingredients').empty();
           var ingredients = data.extendedIngredients;
