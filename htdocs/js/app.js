@@ -328,7 +328,7 @@ $(document).ready(function(){
   		$.magnificPopup.close();
   	});
 
-    // loadDishes();
+    loadDishes();
 
     $('#ingredients').autocomplete({
       valueKey:'name',
