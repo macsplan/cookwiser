@@ -117,6 +117,10 @@ $(document).ready(function(){
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  // NOTE: for the initial page load and if you have no filters selected at all,
+  // this will randomly generate a number between 0 and 800 as the starting
+  // point, and then 100 dishes are returned from the ajax called.
+  // this it to prevent having the same dishes shown every time.
   offsetAmount = getRandomInt(0, 800);
 
   // filters results by mealTime / cuisineType / ingredientsStr / foodIntolerance
