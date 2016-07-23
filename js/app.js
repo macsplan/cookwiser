@@ -12,7 +12,7 @@ var createPDF = function() {
     pdf.addHTML($('#print').get(0), function () {
     pdf.save('Recipe Card.pdf');
   });
-}
+};
 
 $(document).ready(function(){
 
@@ -106,11 +106,11 @@ $(document).ready(function(){
           alert(err);
         }
     });
-  }
+  };
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  };
 
   offsetAmount = getRandomInt(0, 800);
 
@@ -153,7 +153,7 @@ $(document).ready(function(){
           alert(err);
         }
     });
-  }
+  };
 
   var loadDishes = function() {
     $.ajax({
@@ -170,7 +170,7 @@ $(document).ready(function(){
         alert(err);
       }
     });
-  }
+  };
 
 
   var appendDishesTo = function(items, element) {
@@ -217,7 +217,7 @@ $(document).ready(function(){
     });
 
     dishes.appendTo(element);
-  }
+  };
 
 
   // render results
@@ -232,7 +232,7 @@ $(document).ready(function(){
     $grid.imagesLoaded().progress( function() {
       $grid.masonry('layout');
     });
-  }
+  };
 
   // style ingredients in filter
   var styleMyIngredients = function() {
@@ -243,14 +243,14 @@ $(document).ready(function(){
     if (remainder > 0) {
       $(".myIngredients li:last-child").addClass("last");
     }
-  }
+  };
 
   // search by ingredients
   var searchByIngredients = function() {
     var ingredientsStr = ingredientsList.join(',');
     convertIngtoStr = escape(ingredientsStr);
     filterDishes();
-  }
+  };
 
   var searchFilter = function() {
     $( "select[name=cuisine]" ).change(function() {
@@ -268,7 +268,7 @@ $(document).ready(function(){
       foodIntolerance = foodInt;
       filterDishes();
     });
-  }
+  };
 
   // add ingredient to filter
   var addIngredientToFilter = function() {
@@ -298,7 +298,7 @@ $(document).ready(function(){
 
     styleMyIngredients();
     searchByIngredients();
-  }
+  };
 
 
   // init
@@ -318,15 +318,15 @@ $(document).ready(function(){
     });
 
     $('.popup-modal').magnificPopup({
-  		type: 'inline',
-  		preloader: false,
-  		modal: true
-  	});
+      type: 'inline',
+      preloader: false,
+      modal: true
+    });
 
-  	$(document).on('click', '.popup-modal-dismiss', function (e) {
-  		e.preventDefault();
-  		$.magnificPopup.close();
-  	});
+    $(document).on('click', '.popup-modal-dismiss', function (e) {
+      e.preventDefault();
+      $.magnificPopup.close();
+    });
 
     loadDishes();
 
@@ -359,10 +359,7 @@ $(document).ready(function(){
     $('#create_pdf').on('click',function(){
      createPDF();
     });
-  }
+  };
 
   init();
-
-
-
 });
