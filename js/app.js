@@ -1,3 +1,4 @@
+// global variables
 var mashapeKey = "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS";
 var ingredientsList = [];
 var currentItem;
@@ -7,6 +8,7 @@ var cuisineType = "";
 var mealTime = "";
 var foodIntolerance = "";
 
+// create pdf from html
 var createPDF = function() {
   var pdf = new jsPDF('p', 'pt', 'letter');
     pdf.addHTML($('#print').get(0), function () {
@@ -14,8 +16,10 @@ var createPDF = function() {
   });
 };
 
+// main code
 $(document).ready(function(){
 
+  // recipe popup modal
   var openDialog = function(id, linkname, data) {
 
     $('.popup-modal').magnificPopup('open');
@@ -108,12 +112,14 @@ $(document).ready(function(){
     });
   };
 
+  // utility function to generate random number between two points
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
   offsetAmount = getRandomInt(0, 800);
 
+  // filters results by mealTime / cuisineType / ingredientsStr / foodIntolerance
   var filterDishes = function() {
     var url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?limitLicense=false&number=100&offset=0&query=recipe&ranking=1";
 
@@ -155,6 +161,7 @@ $(document).ready(function(){
     });
   };
 
+  // get dishes via ajax
   var loadDishes = function() {
     $.ajax({
       url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=100&offset='+offsetAmount,
@@ -172,7 +179,7 @@ $(document).ready(function(){
     });
   };
 
-
+  // append dishes to page, creating html elements on the fly
   var appendDishesTo = function(items, element) {
     var dishes = $('<div/>')
       .attr("id", "dishes")
@@ -220,7 +227,7 @@ $(document).ready(function(){
   };
 
 
-  // render results
+  // render results (called by loadDishes)
   var renderResults = function(items) {
     var results = $("#results");
     results.empty();
@@ -252,6 +259,7 @@ $(document).ready(function(){
     filterDishes();
   };
 
+  // setup onchange handlers for dropdown filters
   var searchFilter = function() {
     $( "select[name=cuisine]" ).change(function() {
       var cuisineChoosen = $("select[name=cuisine] option:selected").val();
@@ -270,7 +278,7 @@ $(document).ready(function(){
     });
   };
 
-  // add ingredient to filter
+  // adds ingredients to filter sidebar
   var addIngredientToFilter = function() {
     $('.hidefilter').show();
     var parent = $(".myIngredients");
@@ -301,7 +309,7 @@ $(document).ready(function(){
   };
 
 
-  // init
+  // initializer
   var init = function() {
     $.ajaxSetup({
       headers: { "X-Mashape-Key": "Fsz4qtOaKNmshsm6NqrJIFaLjD6jp1lWBaMjsn7wQaIvTisGiS" }
@@ -330,6 +338,7 @@ $(document).ready(function(){
 
     loadDishes();
 
+    // setup autocomplete
     $('#ingredients').autocomplete({
       valueKey:'name',
       limit: 12,
@@ -361,5 +370,6 @@ $(document).ready(function(){
     });
   };
 
+  // manually fire initializer
   init();
 });
