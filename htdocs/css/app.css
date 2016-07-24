@@ -181,22 +181,19 @@ html {
 body {
   font-family: sans-serif; }
 
-/* ---- grid ---- */
-/* clear fix */
-.grid:after {
+#results .grid:after {
   content: '';
   display: block;
   clear: both; }
 
-/* ---- .grid-item ---- */
-.grid-sizer,
-.grid-item {
+#results .grid-sizer,
+#results .grid-item {
   width: 20%; }
 
-.grid-item {
+#results .grid-item {
   float: left; }
 
-.grid-item img {
+#results .grid-item img {
   display: block;
   max-width: 100%;
   width: 100%; }
@@ -316,6 +313,19 @@ body {
       max-width: 223px;
       margin: 0 auto;
       margin-bottom: 4%; }
+  #test-modal #similar-recipies .grid:after {
+    content: '';
+    display: block;
+    clear: both; }
+  #test-modal #similar-recipies .grid-sizer,
+  #test-modal #similar-recipies .grid-item {
+    width: 20%; }
+  #test-modal #similar-recipies .grid-item {
+    float: left; }
+  #test-modal #similar-recipies .grid-item img {
+    display: block;
+    max-width: 100%;
+    width: 100%; }
 
 .hidefilter {
   display: none; }

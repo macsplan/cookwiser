@@ -208,179 +208,197 @@ html { overflow-y: scroll; }
 
 body { font-family: sans-serif; }
 
-/* ---- grid ---- */
+#results {
+  .grid:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 
+  .grid-sizer,
+  .grid-item {
+    width: 20%;
+  }
 
-/* clear fix */
-.grid:after {
-  content: '';
-  display: block;
-  clear: both;
+  .grid-item {
+    float: left;
+  }
+
+  .grid-item img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
-/* ---- .grid-item ---- */
-
-.grid-sizer,
-.grid-item {
-  width: 20%;
-}
-
-.grid-item {
-  float: left;
-}
-
-.grid-item img {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-}
-
-  #test-modal {
-    background-image: url("../img/choppingboard.jpg");
-    background-color: white;
-    text-align: center;
-    height: 100%;
-    h1 {
-      width: 90%;
-      margin-left: 10%;
-    }
-    .imageRow {
-      background-color: #fff;
-      border-top: 5px solid #613594;
-      border-bottom: 10px solid #ca3763;
-      height: 60vh;
-      img {
-        height: 100%;
-        max-height: 100%;
-        max-width: 100%;
-        background-color: white;
-      }
-    }
-    #print {
-      background-color: white;
-      .cardIntro {
-        background-color: #fff;
-        margin: 2%;
-        padding: 3%;
-        font-family: "PT Mono";
-        color: #ca3763;
-        margin: 0 auto;
-        span {
-          background-color: white;
-          font-size: 2em;
-        }
-        em {
-          background-color: white;
-          font-style: normal;
-          font-size: 1.5em;
-        }
-      }
-    }
-    #method {
-      background-color: white !important;
-      width: 90%;
-      margin: 2% auto;
-      padding-top: 5px;
+#test-modal {
+  background-image: url("../img/choppingboard.jpg");
+  background-color: white;
+  text-align: center;
+  height: 100%;
+  h1 {
+    width: 90%;
+    margin-left: 10%;
+  }
+  .imageRow {
+    background-color: #fff;
+    border-top: 5px solid #613594;
+    border-bottom: 10px solid #ca3763;
+    height: 60vh;
+    img {
       height: 100%;
-      .recipe_guide {
-        width: 60%;
-        margin-left: 40%;
-        text-align: right;
-        background-color: white !important;
-        padding: 2%;
-        .serving, .ready_in  {
-            display: inline;
-            background-color: white;
-            text-align: left;
-            .fa {
-              background-color: #bebebe;
-              padding: 5px 8px;
-              font-size: 2em;
-              border-radius: 5px;
-              color: #fff;
-            }
-            span {
-              padding-left: 5px;
-              display: inline-block;
-              vertical-align: top;
-            }
-            em {
-              display: block;
-              font-style: normal;
-              font-size: 1.4em;;
-            }
-        }
-        .serving {
+      max-height: 100%;
+      max-width: 100%;
+      background-color: white;
+    }
+  }
+  #print {
+    background-color: white;
+    .cardIntro {
+      background-color: #fff;
+      margin: 2%;
+      padding: 3%;
+      font-family: "PT Mono";
+      color: #ca3763;
+      margin: 0 auto;
+      span {
+        background-color: white;
+        font-size: 2em;
+      }
+      em {
+        background-color: white;
+        font-style: normal;
+        font-size: 1.5em;
+      }
+    }
+  }
+  #method {
+    background-color: white !important;
+    width: 90%;
+    margin: 2% auto;
+    padding-top: 5px;
+    height: 100%;
+    .recipe_guide {
+      width: 60%;
+      margin-left: 40%;
+      text-align: right;
+      background-color: white !important;
+      padding: 2%;
+      .serving, .ready_in  {
+          display: inline;
           background-color: white;
-          padding-right: 10px;
-        }
-      }
-      .summary {
-        margin: 2% 2.5% 0;
-        text-align: left;
-        background-color: white !important;
-      }
-
-      .ingredient_label, .directions_label {
-        font-family: "PT Mono";
-        background-color: #613594;
-        width: 200px;
-        color: #fff;
-        text-transform: uppercase;
-        font-size: 1.3em;
-        padding: 4px;
-      }
-      .ingredients {
-        padding: 2%;
-        border: 2px dashed #829c05;
-        margin: 3% 5% 5%;
-        border-radius: 30px;
-        text-align: center;
-        p {
-          width: 100px;
-          display: inline-block;
-          vertical-align: top;
-          margin: 1%;
-          img {
-            width: 100px;
-            max-height: 70px;
+          text-align: left;
+          .fa {
+            background-color: #bebebe;
+            padding: 5px 8px;
+            font-size: 2em;
+            border-radius: 5px;
+            color: #fff;
           }
           span {
-            font-size: 12px;
-            text-align: center;
+            padding-left: 5px;
+            display: inline-block;
+            vertical-align: top;
+          }
+          em {
             display: block;
+            font-style: normal;
+            font-size: 1.4em;;
           }
-        }
       }
-      .method {
-        margin: 3.5% 2.5%;
-        text-align: left;
-        ol {
-          width: 98%;
-          color: black;
-          a {
-            color: black;
-          }
-          li {
-            margin-bottom: 1em;
-          }
-        }
-      }
-      #create_pdf {
-        background-color: #819c05;
-        padding: 17px;
-        color: #fff;
-        border-radius: 10px;
-        max-width: 223px;
-        margin: 0 auto;
-        margin-bottom: 4%;
+      .serving {
+        background-color: white;
+        padding-right: 10px;
       }
     }
-  }
+    .summary {
+      margin: 2% 2.5% 0;
+      text-align: left;
+      background-color: white !important;
+    }
 
-  .hidefilter {
-    display: none;
+    .ingredient_label, .directions_label {
+      font-family: "PT Mono";
+      background-color: #613594;
+      width: 200px;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1.3em;
+      padding: 4px;
+    }
+    .ingredients {
+      padding: 2%;
+      border: 2px dashed #829c05;
+      margin: 3% 5% 5%;
+      border-radius: 30px;
+      text-align: center;
+      p {
+        width: 100px;
+        display: inline-block;
+        vertical-align: top;
+        margin: 1%;
+        img {
+          width: 100px;
+          max-height: 70px;
+        }
+        span {
+          font-size: 12px;
+          text-align: center;
+          display: block;
+        }
+      }
+    }
+    .method {
+      margin: 3.5% 2.5%;
+      text-align: left;
+      ol {
+        width: 98%;
+        color: black;
+        a {
+          color: black;
+        }
+        li {
+          margin-bottom: 1em;
+        }
+      }
+    }
+    #create_pdf {
+      background-color: #819c05;
+      padding: 17px;
+      color: #fff;
+      border-radius: 10px;
+      max-width: 223px;
+      margin: 0 auto;
+      margin-bottom: 4%;
+    }
   }
+  #similar-recipies {
+    .grid:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .grid-sizer,
+    .grid-item {
+      width: 20%;
+    }
+
+    .grid-item {
+      float: left;
+    }
+
+    .grid-item img {
+      display: block;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.hidefilter {
+  display: none;
+}
 
 select {
   background: transparent;

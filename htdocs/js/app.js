@@ -110,6 +110,28 @@ $(document).ready(function(){
           alert(err);
         }
     });
+
+    $.ajax({
+        url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/similar',
+        type: 'GET',
+        data: {}, // Additional parameters here
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+
+          var el = $('#similar-recipies');
+          appendDishesTo(data, el);
+
+          el.masonry();
+
+          el.imagesLoaded().progress( function() {
+            el.masonry('layout');
+          });
+        },
+        error: function(err) {
+          alert(err);
+        }
+    });
   };
 
   // utility function to generate random number between two points
@@ -183,7 +205,7 @@ $(document).ready(function(){
     });
   };
 
-  // append dishes to page, creating html elements on the fly
+  // append dishes to element, creating html elements on the fly
   var appendDishesTo = function(items, element) {
     var dishes = $('<div/>')
       .attr("id", "dishes")
