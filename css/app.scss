@@ -373,6 +373,7 @@ body { font-family: sans-serif; }
     }
   }
   #similar-recipies {
+    background-color: red;
     .grid:after {
       content: '';
       display: block;
@@ -381,7 +382,7 @@ body { font-family: sans-serif; }
 
     .grid-sizer,
     .grid-item {
-      width: 20%;
+      width: 25%;
     }
 
     .grid-item {
@@ -510,9 +511,17 @@ select {
 
 
 @media (max-width: 400px) {
-  .grid-sizer,
-  .grid-item {
-    width: 100% !important;
+  #results {
+    .grid-sizer,
+    .grid-item {
+      width: 100% !important;
+    }
+  }
+   #test-modal  #similar-recipies {
+    .grid-sizer,
+    .grid-item {
+      width: 100% !important;
+    }
   }
 }
 
@@ -533,9 +542,17 @@ select {
 
 
 @media (max-width: 600px) {
-  .grid-sizer,
-  .grid-item {
-    width: 50%;
+  #results {
+    .grid-sizer,
+    .grid-item {
+      width: 50%;
+    }
+  }
+   #test-modal  #similar-recipies {
+    .grid-sizer,
+    .grid-item {
+      width: 50%;
+    }
   }
   #test-modal {
     h1 {
@@ -565,16 +582,32 @@ select {
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
-  .grid-sizer,
-  .grid-item {
-    width: 33.3333%;
+  #results {
+    .grid-sizer,
+    .grid-item {
+      width: 33.3333%;
+    }
+  }
+   #test-modal  #similar-recipies {
+    .grid-sizer,
+    .grid-item {
+      width: 33.3333%;
+    }
   }
 }
 
 
 @media (min-width: 901px) and (max-width: 1200px) {
-  .grid-sizer,
-  .grid-item {
-    width: 25%;
+  #results {
+    .grid-sizer,
+    .grid-item {
+      width: 25%;
+    }
+  }
+   #test-modal  #similar-recipies {
+    .grid-sizer,
+    .grid-item {
+      width: 25%;
+    }
   }
 }

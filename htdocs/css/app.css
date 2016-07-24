@@ -313,19 +313,21 @@ body {
       max-width: 223px;
       margin: 0 auto;
       margin-bottom: 4%; }
-  #test-modal #similar-recipies .grid:after {
-    content: '';
-    display: block;
-    clear: both; }
-  #test-modal #similar-recipies .grid-sizer,
-  #test-modal #similar-recipies .grid-item {
-    width: 20%; }
-  #test-modal #similar-recipies .grid-item {
-    float: left; }
-  #test-modal #similar-recipies .grid-item img {
-    display: block;
-    max-width: 100%;
-    width: 100%; }
+  #test-modal #similar-recipies {
+    background-color: red; }
+    #test-modal #similar-recipies .grid:after {
+      content: '';
+      display: block;
+      clear: both; }
+    #test-modal #similar-recipies .grid-sizer,
+    #test-modal #similar-recipies .grid-item {
+      width: 25%; }
+    #test-modal #similar-recipies .grid-item {
+      float: left; }
+    #test-modal #similar-recipies .grid-item img {
+      display: block;
+      max-width: 100%;
+      width: 100%; }
 
 .hidefilter {
   display: none; }
@@ -424,8 +426,11 @@ select#soflow-color {
   padding-left: 15px; }
 
 @media (max-width: 400px) {
-  .grid-sizer,
-  .grid-item {
+  #results .grid-sizer,
+  #results .grid-item {
+    width: 100% !important; }
+  #test-modal #similar-recipies .grid-sizer,
+  #test-modal #similar-recipies .grid-item {
     width: 100% !important; } }
 
 @media (min-width: 450px) {
@@ -440,8 +445,11 @@ select#soflow-color {
       padding-top: 1% !important; } }
 
 @media (max-width: 600px) {
-  .grid-sizer,
-  .grid-item {
+  #results .grid-sizer,
+  #results .grid-item {
+    width: 50%; }
+  #test-modal #similar-recipies .grid-sizer,
+  #test-modal #similar-recipies .grid-item {
     width: 50%; }
   #test-modal h1 {
     font-size: 1.5em; }
@@ -461,11 +469,17 @@ select#soflow-color {
     margin-left: 20%; } }
 
 @media (min-width: 601px) and (max-width: 900px) {
-  .grid-sizer,
-  .grid-item {
+  #results .grid-sizer,
+  #results .grid-item {
+    width: 33.3333%; }
+  #test-modal #similar-recipies .grid-sizer,
+  #test-modal #similar-recipies .grid-item {
     width: 33.3333%; } }
 
 @media (min-width: 901px) and (max-width: 1200px) {
-  .grid-sizer,
-  .grid-item {
+  #results .grid-sizer,
+  #results .grid-item {
+    width: 25%; }
+  #test-modal #similar-recipies .grid-sizer,
+  #test-modal #similar-recipies .grid-item {
     width: 25%; } }

@@ -7,6 +7,7 @@ var convertIngtoStr = "";
 var cuisineType = "";
 var mealTime = "";
 var foodIntolerance = "";
+var $selectPopup = $('.white-popup-block');
 
 // create pdf from html
 var createPDF = function() {
@@ -16,9 +17,62 @@ var createPDF = function() {
   });
 };
 
+var writeRecipe = function(data) {
+  var $selectPopup = $('.white-popup-block');
+  var $selectPopupServe = $selectPopup.find('.serving span em');
+  var $selectPopupReady = $selectPopup.find('.ready_in span em');
+  var $selectIngredList = $selectPopup.find('.ingredients .list');
+  $selectPopup.find('h1').text(data.title);
+  $selectPopup.find('.imageRow img').attr('src', data.image);
+  $selectPopupServe.empty();
+  $selectPopupServe.text(data.servings);
+  $selectPopupReady.empty();
+  $selectPopupReady.text(data.readyInMinutes+ " minutes");
+  $selectPopup.find('.cardIntro em').text( data.title);
+
+  $selectIngredList.empty();
+  var ingredients = data.extendedIngredients;
+  ingredients.forEach(function(ingredient) {
+    var line = $("<p/>")
+      .appendTo($selectIngredList);
+    var img = $("<img/>")
+      .attr("src", ingredient.image)
+      .appendTo(line);
+    var instruction = $("<span/>")
+      .text(ingredient.originalString)
+      .appendTo(line);
+  });
+}
+
+var writeMethodSteps = function(data) {
+  if (data.length > 0) {
+    var steps = data[0].steps;
+    console.log($selectPopup);
+    $('.white-popup-block .method').empty();
+
+    var ol = $("<ol/>");
+
+    steps.forEach(function(step) {
+      var line = $("<li/>")
+        .text(step.step)
+        .appendTo(ol);
+    });
+  } else {
+    var ol = $("<ol/>");
+      linkname = linkname.toLowerCase();
+
+      var link = $("<a/>")
+      .attr("href", "https://spoonacular.com/recipes/"+linkname+"-"+id)
+      .text("Read the detailed instructions here");
+
+      link.appendTo(ol);
+  }
+
+  ol.appendTo($('.white-popup-block .method'));
+};
+
 // main code
 $(document).ready(function(){
-
   // recipe popup modal
   var openDialog = function(id, linkname, data) {
 
@@ -31,26 +85,7 @@ $(document).ready(function(){
         data: {}, // Additional parameters here
         dataType: 'json',
         success: function(data) {
-          $('.white-popup-block h1').text(data.title);
-          $('.white-popup-block .imageRow img').attr('src', data.image);
-          $('.white-popup-block .serving span em').empty();
-          $('.white-popup-block .serving span em').text(data.servings);
-          $('.white-popup-block .ready_in span em ').empty();
-          $('.white-popup-block .ready_in span em').text(data.readyInMinutes+ " minutes");
-          $('.white-popup-block .cardIntro em').text( data.title);
-
-          $('.white-popup-block .ingredients .list').empty();
-          var ingredients = data.extendedIngredients;
-          ingredients.forEach(function(ingredient) {
-            var line = $("<p/>")
-              .appendTo($('.white-popup-block .ingredients .list'));
-            var img = $("<img/>")
-              .attr("src", ingredient.image)
-              .appendTo(line);
-            var instruction = $("<span/>")
-              .text(ingredient.originalString)
-              .appendTo(line);
-          });
+          writeRecipe(data);
         },
         error: function(err) {
           alert(err);
@@ -82,29 +117,7 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data) {
           console.log(data);
-          if (data.length > 0) {
-            var steps = data[0].steps;
-            $('.white-popup-block .method').empty();
-
-            var ol = $("<ol/>");
-
-            steps.forEach(function(step) {
-              var line = $("<li/>")
-                .text(step.step)
-                .appendTo(ol);
-            });
-          } else {
-            var ol = $("<ol/>");
-              linkname = linkname.toLowerCase();
-
-              var link = $("<a/>")
-              .attr("href", "https://spoonacular.com/recipes/"+linkname+"-"+id)
-              .text("Read the detailed instructions here");
-
-              link.appendTo(ol);
-          }
-
-          ol.appendTo($('.white-popup-block .method'));
+          writeMethodSteps(data);
         },
         error: function(err) {
           alert(err);
@@ -118,15 +131,19 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data) {
           console.log(data);
-
           var el = $('#similar-recipies');
+
+          el.empty();
           appendDishesTo(data, el);
 
-          el.masonry();
+          el.masonry({
+            itemSelector: '.grid-item'
+          });
 
           el.imagesLoaded().progress( function() {
-            el.masonry('layout');
+           el.masonry('layout');
           });
+
         },
         error: function(err) {
           alert(err);
