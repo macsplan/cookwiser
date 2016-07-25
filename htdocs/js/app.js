@@ -9,6 +9,7 @@ var mealTime = "";
 var foodIntolerance = "";
 var $selectPopup = $('.white-popup-block');
 
+
 // create pdf from html
 var createPDF = function() {
   var pdf = new jsPDF('p', 'pt', 'letter');
@@ -423,7 +424,7 @@ $(document).ready(function(){
       };
 
       $('#create_pdf').click(function () {
-       createPDF();
+       createPDF ();
       });
     });
   };
