@@ -12,9 +12,12 @@ var $selectPopup = $('.white-popup-block');
 // create pdf from html
 var createPDF = function() {
   var pdf = new jsPDF('p', 'pt', 'letter');
+    var options = {
+    background: '#fff' //background is transparent if you don't set it, which turns it black for some reason.
+    };
     pdf.addHTML($('#print').get(0), function () {
     pdf.save('Recipe Card.pdf');
-  });
+    });
 };
 
 var writeRecipe = function(data) {
@@ -133,16 +136,7 @@ $(document).ready(function(){
           console.log(data);
           var el = $('#similar-recipies');
 
-          el.empty();
           appendDishesTo(data, el);
-
-          el.masonry({
-            itemSelector: '.grid-item'
-          });
-
-          el.imagesLoaded().progress( function() {
-           el.masonry('layout');
-          });
 
         },
         error: function(err) {
@@ -224,6 +218,8 @@ $(document).ready(function(){
 
   // append dishes to element, creating html elements on the fly
   var appendDishesTo = function(items, element) {
+    element.empty();
+
     var dishes = $('<div/>')
       .attr("id", "dishes")
       .addClass("grid");
@@ -267,6 +263,17 @@ $(document).ready(function(){
     });
 
     dishes.appendTo(element);
+
+    // dishes.masonry({
+    //   itemSelector: '.grid-item'
+    // });
+
+    dishes.masonry();
+
+    dishes.imagesLoaded().progress( function() {
+     dishes.masonry('layout');
+    });
+
   };
 
 
@@ -277,11 +284,11 @@ $(document).ready(function(){
 
     appendDishesTo(items, results)
 
-    var $grid = $('#dishes').masonry();
-
-    $grid.imagesLoaded().progress( function() {
-      $grid.masonry('layout');
-    });
+    // var $grid = $('#dishes').masonry();
+    //
+    // $grid.imagesLoaded().progress( function() {
+    //   $grid.masonry('layout');
+    // });
   };
 
   // style ingredients in filter

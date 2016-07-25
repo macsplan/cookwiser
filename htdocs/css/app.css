@@ -200,7 +200,7 @@ body {
 
 #test-modal {
   background-image: url("../img/choppingboard.jpg");
-  background-color: white;
+  background-color: #FFFFFF;
   text-align: center;
   height: 100%; }
   #test-modal h1 {
@@ -215,9 +215,9 @@ body {
       height: 100%;
       max-height: 100%;
       max-width: 100%;
-      background-color: white; }
+      background-color: #FFFFFF; }
   #test-modal #print {
-    background-color: white; }
+    background-color: #FFFFFF; }
     #test-modal #print .cardIntro {
       background-color: #fff;
       margin: 2%;
@@ -226,14 +226,14 @@ body {
       color: #ca3763;
       margin: 0 auto; }
       #test-modal #print .cardIntro span {
-        background-color: white;
+        background-color: #FFFFFF;
         font-size: 2em; }
       #test-modal #print .cardIntro em {
-        background-color: white;
+        background-color: #FFFFFF;
         font-style: normal;
         font-size: 1.5em; }
   #test-modal #method {
-    background-color: white !important;
+    background-color: #FFFFFF !important;
     width: 90%;
     margin: 2% auto;
     padding-top: 5px;
@@ -242,11 +242,11 @@ body {
       width: 60%;
       margin-left: 40%;
       text-align: right;
-      background-color: white !important;
+      background-color: #FFFFFF !important;
       padding: 2%; }
       #test-modal #method .recipe_guide .serving, #test-modal #method .recipe_guide .ready_in {
         display: inline;
-        background-color: white;
+        background-color: #FFFFFF;
         text-align: left; }
         #test-modal #method .recipe_guide .serving .fa, #test-modal #method .recipe_guide .ready_in .fa {
           background-color: #bebebe;
@@ -263,12 +263,12 @@ body {
           font-style: normal;
           font-size: 1.4em; }
       #test-modal #method .recipe_guide .serving {
-        background-color: white;
+        background-color: #FFFFFF;
         padding-right: 10px; }
     #test-modal #method .summary {
       margin: 2% 2.5% 0;
       text-align: left;
-      background-color: white !important; }
+      background-color: #FFFFFF !important; }
     #test-modal #method .ingredient_label, #test-modal #method .directions_label {
       font-family: "PT Mono";
       background-color: #613594;
@@ -279,10 +279,10 @@ body {
       padding: 4px; }
     #test-modal #method .ingredients {
       padding: 2%;
-      border: 2px dashed #829c05;
       margin: 3% 5% 5%;
       border-radius: 30px;
-      text-align: center; }
+      text-align: center;
+      background-color: #FFFFFF !important; }
       #test-modal #method .ingredients p {
         width: 100px;
         display: inline-block;
@@ -297,7 +297,8 @@ body {
           display: block; }
     #test-modal #method .method {
       margin: 3.5% 2.5%;
-      text-align: left; }
+      text-align: left;
+      background-color: #FFFFFF !important; }
       #test-modal #method .method ol {
         width: 98%;
         color: black; }
@@ -313,21 +314,27 @@ body {
       max-width: 223px;
       margin: 0 auto;
       margin-bottom: 4%; }
-  #test-modal #similar-recipies {
-    background-color: red; }
-    #test-modal #similar-recipies .grid:after {
-      content: '';
-      display: block;
-      clear: both; }
-    #test-modal #similar-recipies .grid-sizer,
-    #test-modal #similar-recipies .grid-item {
-      width: 25%; }
-    #test-modal #similar-recipies .grid-item {
-      float: left; }
-    #test-modal #similar-recipies .grid-item img {
-      display: block;
-      max-width: 100%;
-      width: 100%; }
+  #test-modal #similar {
+    background-color: #ca3763;
+    padding: 2%;
+    color: #fff; }
+    #test-modal #similar .similarIntro {
+      font-family: "PT Mono";
+      text-transform: uppercase;
+      font-size: 2em; }
+  #test-modal #similar-recipies .grid:after {
+    content: '';
+    display: block;
+    clear: both; }
+  #test-modal #similar-recipies .grid-sizer,
+  #test-modal #similar-recipies .grid-item {
+    width: 25%; }
+  #test-modal #similar-recipies .grid-item {
+    float: left; }
+  #test-modal #similar-recipies .grid-item img {
+    display: block;
+    max-width: 100%;
+    width: 100%; }
 
 .hidefilter {
   display: none; }
