@@ -5,6 +5,7 @@
    background-image: url("../img/choppingboard.jpg");
    margin: 0;
 }
+
 a {
     text-decoration: none !important;
     -webkit-transition: all 225ms ease;
@@ -137,7 +138,7 @@ article {
   text-align: center;
   h1 {
     color: #ca3763;
-    font-family: 'PT Mono', ;
+    // font-family: 'PT Mono', ;
     text-transform: uppercase;
     font-size: 2em;
   }
@@ -149,7 +150,7 @@ article {
   .filter-cta {
     background-color: #819c05;
     text-transform: uppercase;
-    font-family: 'PT Mono', ;
+    // font-family: 'PT Mono', ;
     color: #fff;
     width: 95%;
     margin: 2% 2% 6%;
@@ -180,7 +181,7 @@ article {
       padding: 5%;
       margin: 0;
       text-transform: uppercase;
-      font-family: 'PT Mono', ;
+      // font-family: 'PT Mono', ;
     }
   }
 }
@@ -258,7 +259,7 @@ body { font-family: sans-serif; }
       background-color: #fff;
       margin: 2%;
       padding: 3%;
-      font-family: "PT Mono";
+      // font-family: "PT Mono";
       color: #ca3763;
       margin: 0 auto;
       span {
@@ -318,7 +319,7 @@ body { font-family: sans-serif; }
     }
 
     .ingredient_label, .directions_label {
-      font-family: "PT Mono";
+      // font-family: "PT Mono";
       background-color: #613594;
       width: 200px;
       color: #fff;
@@ -328,7 +329,7 @@ body { font-family: sans-serif; }
     }
     .ingredients {
       padding: 2%;
-      // border: 2px dashed #829c05;
+      border: 2px dashed #829c05;
       margin: 3% 5% 5%;
       border-radius: 30px;
       text-align: center;
@@ -379,7 +380,7 @@ body { font-family: sans-serif; }
     padding: 2%;
     color: #fff;
     .similarIntro {
-      font-family: "PT Mono";
+      // font-family: "PT Mono";
       text-transform: uppercase;
       font-size: 2em;
     }

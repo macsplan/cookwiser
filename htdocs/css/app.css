@@ -121,7 +121,6 @@ article {
   text-align: center; }
   .content h1 {
     color: #ca3763;
-    font-family: "PT Mono";
     text-transform: uppercase;
     font-size: 2em; }
   .content .intro {
@@ -131,7 +130,6 @@ article {
   .content .filter-cta {
     background-color: #819c05;
     text-transform: uppercase;
-    font-family: "PT Mono";
     color: #fff;
     width: 95%;
     margin: 2% 2% 6%;
@@ -155,8 +153,7 @@ article {
   width: 100%;
   padding: 5%;
   margin: 0;
-  text-transform: uppercase;
-  font-family: "PT Mono"; }
+  text-transform: uppercase; }
 
 .overlay {
   display: none; }
@@ -222,7 +219,6 @@ body {
       background-color: #fff;
       margin: 2%;
       padding: 3%;
-      font-family: "PT Mono";
       color: #ca3763;
       margin: 0 auto; }
       #test-modal #print .cardIntro span {
@@ -270,7 +266,6 @@ body {
       text-align: left;
       background-color: #FFFFFF !important; }
     #test-modal #method .ingredient_label, #test-modal #method .directions_label {
-      font-family: "PT Mono";
       background-color: #613594;
       width: 200px;
       color: #fff;
@@ -279,6 +274,7 @@ body {
       padding: 4px; }
     #test-modal #method .ingredients {
       padding: 2%;
+      border: 2px dashed #829c05;
       margin: 3% 5% 5%;
       border-radius: 30px;
       text-align: center;
@@ -319,7 +315,6 @@ body {
     padding: 2%;
     color: #fff; }
     #test-modal #similar .similarIntro {
-      font-family: "PT Mono";
       text-transform: uppercase;
       font-size: 2em; }
   #test-modal #similar-recipies .grid:after {

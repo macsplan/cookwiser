@@ -12,13 +12,17 @@ var $selectPopup = $('.white-popup-block');
 
 // create pdf from html
 var createPDF = function() {
+  $('.ingredients p img').hide();
   var pdf = new jsPDF('p', 'pt', 'letter');
-    var options = {
-    background: '#fff' //background is transparent if you don't set it, which turns it black for some reason.
-    };
-    pdf.addHTML($('#print').get(0), function () {
-    pdf.save('Recipe Card.pdf');
-    });
+  var options = { "background": '#fff' };
+  pdf.addHTML($('#print').get(0), function() {
+    setTimeout(function(){
+      pdf.save('Recipe Card.pdf');
+    }, 1000);
+    setTimeout(function(){
+      $('.ingredients p img').show();
+    }, 1000);
+   });
 };
 
 var writeRecipe = function(data) {
@@ -423,7 +427,8 @@ $(document).ready(function(){
           }
       };
 
-      $('#create_pdf').click(function () {
+      $('#create_pdf').click(function (e) {
+        e.preventDefault();
        createPDF ();
       });
     });
