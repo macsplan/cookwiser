@@ -10,15 +10,15 @@ var foodIntolerance = "";
 var $selectPopup = $('.white-popup-block');
 
 // create pdf from html
-// var createPDF = function() {
-//   var pdf = new jsPDF('p', 'pt', 'letter');
-//     var options = {
-//     background: '#fff' //background is transparent if you don't set it, which turns it black for some reason.
-//     };
-//     pdf.addHTML($('#print').get(0), function () {
-//     pdf.save('Recipe Card.pdf');
-//     });
-// };
+var createPDF = function() {
+  var pdf = new jsPDF('p', 'pt', 'letter');
+    var options = {
+    background: '#fff' //background is transparent if you don't set it, which turns it black for some reason.
+    };
+    pdf.addHTML($('#print').get(0), function () {
+    pdf.save('Recipe Card.pdf');
+    });
+};
 
 var writeRecipe = function(data) {
   var $selectPopup = $('.white-popup-block');
@@ -423,17 +423,7 @@ $(document).ready(function(){
       };
 
       $('#create_pdf').click(function () {
-        var doc = new jsPDF();
-        var source = $('#print').html();
-        var specialElementHandlers = {
-           '#bypassme': function (element, renderer) {
-               return true;
-           }
-        };
-        doc.fromHTML(source, 0.5, 0.5, {
-          'width': 75,'elementHandlers': specialElementHandlers
-        });
-        doc.output("dataurlnewwindow");
+       createPDF();
       });
     });
   };
